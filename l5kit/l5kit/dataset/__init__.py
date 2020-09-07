@@ -1,5 +1,5 @@
 from .agent import AgentDataset
-from .dataloader_builder import build_dataloader
 from .ego import EgoDataset
+from .select_agents import select_agents
 
-__all__ = ["EgoDataset", "AgentDataset", "build_dataloader"]
+__all__ = ["EgoDataset", "AgentDataset", "select_agents"]

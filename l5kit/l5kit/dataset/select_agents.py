@@ -2,6 +2,7 @@ import argparse
 import multiprocessing
 import os
 import pprint
+import sys
 from collections import Counter, defaultdict
 from functools import partial
 from multiprocessing import Pool, cpu_count
@@ -17,8 +18,11 @@ from tqdm import tqdm
 
 from l5kit.data import ChunkedDataset
 from l5kit.data.filter import _get_label_filter  # TODO expose this without digging
+from l5kit.geometry import angular_distance
 
-multiprocessing.set_start_method("fork", force=True)  # this fix loop in python 3.8 on MacOS
+if sys.platform == "darwin":
+    multiprocessing.set_start_method("fork", force=True)  # this fixes loop in python 3.8 on MacOS
+
 os.environ["BLOSC_NOLOCK"] = "1"  # this is required for multiprocessing
 
 TH_YAW_DEGREE = 30
@@ -38,11 +42,9 @@ def in_angular_distance(yaw1: np.ndarray, yaw2: np.ndarray, th: float) -> bool:
     """
     Check if the absolute distance in degrees is under the given threshold
     """
-    yaw1_in_deg = np.degrees(yaw1)
-    yaw2_in_deg = np.degrees(yaw2)
-    assert -180 <= yaw1_in_deg <= 180 and -180 <= yaw2_in_deg <= 180  # ensures the next line gives correct results
-    abs_angular_distance = abs((yaw2_in_deg - yaw1_in_deg + 180) % 360 - 180)
-    return bool(abs_angular_distance < th)
+
+    abs_angular_distance_degrees = abs(angular_distance(float(yaw2), float(yaw1))) * 180 / np.pi
+    return bool(abs_angular_distance_degrees < th)
 
 
 def in_extent_ratio(extent1: np.ndarray, extent2: np.ndarray, th: float) -> bool:
@@ -231,7 +233,7 @@ def select_agents(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_folders", nargs="+", type=str, required=True, help="zarr path")
-    parser.add_argument("--th_agent_prob", type=float, default=0.5, help="perception threshold on agents of interest")
+    parser.add_argument("--th_agent_prob", type=float, required=True, help="perception threshold on agents")
     parser.add_argument("--th_yaw_degree", type=float, default=TH_YAW_DEGREE, help="max absolute distance in degree")
     parser.add_argument("--th_extent_ratio", type=float, default=TH_EXTENT_RATIO, help="max change in area allowed")
     parser.add_argument("--th_distance_av", type=float, default=TH_DISTANCE_AV, help="max distance from AV in meters")
