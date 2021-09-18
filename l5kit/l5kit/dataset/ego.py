@@ -1,28 +1,25 @@
 import bisect
+import warnings
 from functools import partial
-from typing import Optional, Tuple, cast
+from typing import Optional
 
 import numpy as np
 from torch.utils.data import Dataset
 
-from ..data import (
-    ChunkedDataset,
-    get_agents_slice_from_frames,
-    get_frames_slice_from_scenes,
-    get_tl_faces_slice_from_frames,
-)
+from ..data import ChunkedDataset, get_frames_slice_from_scenes
 from ..kinematic import Perturbation
-from ..rasterization import Rasterizer
+from ..rasterization import Rasterizer, RenderContext
 from ..sampling import generate_agent_sample
+from .utils import convert_str_to_fixed_length_tensor
 
 
 class EgoDataset(Dataset):
     def __init__(
-        self,
-        cfg: dict,
-        zarr_dataset: ChunkedDataset,
-        rasterizer: Rasterizer,
-        perturbation: Optional[Perturbation] = None,
+            self,
+            cfg: dict,
+            zarr_dataset: ChunkedDataset,
+            rasterizer: Rasterizer,
+            perturbation: Optional[Perturbation] = None,
     ):
         """
         Get a PyTorch dataset object that can be used to train DNN
@@ -41,16 +38,20 @@ None if not desired
 
         self.cumulative_sizes = self.dataset.scenes["frame_index_interval"][:, 1]
 
+        render_context = RenderContext(
+            raster_size_px=np.array(cfg["raster_params"]["raster_size"]),
+            pixel_size_m=np.array(cfg["raster_params"]["pixel_size"]),
+            center_in_raster_ratio=np.array(cfg["raster_params"]["ego_center"]),
+            set_origin_to_bottom=cfg["raster_params"]["set_origin_to_bottom"],
+        )
+
         # build a partial so we don't have to access cfg each time
         self.sample_function = partial(
             generate_agent_sample,
-            raster_size=cast(Tuple[int, int], tuple(cfg["raster_params"]["raster_size"])),
-            pixel_size=np.array(cfg["raster_params"]["pixel_size"]),
-            ego_center=np.array(cfg["raster_params"]["ego_center"]),
+            render_context=render_context,
             history_num_frames=cfg["model_params"]["history_num_frames"],
-            history_step_size=cfg["model_params"]["history_step_size"],
             future_num_frames=cfg["model_params"]["future_num_frames"],
-            future_step_size=cfg["model_params"]["future_step_size"],
+            step_time=cfg["model_params"]["step_time"],
             filter_agents_threshold=cfg["raster_params"]["filter_agents_threshold"],
             rasterizer=rasterizer,
             perturbation=perturbation,
@@ -74,39 +75,39 @@ None if not desired
             state_index (int): a relative frame index in the scene
             track_id (Optional[int]): the agent to rasterize or None for the AV
         Returns:
-            dict: the rasterised image, the target trajectory (position and yaw) along with their availability,
-            the 2D matrix to center that agent, the agent track (-1 if ego) and the timestamp
+            dict: the rasterised image in (Cx0x1) if the rast is not None, the target trajectory
+            (position and yaw) along with their availability, the 2D matrix to center that agent,
+            the agent track (-1 if ego) and the timestamp
 
         """
         frames = self.dataset.frames[get_frames_slice_from_scenes(self.dataset.scenes[scene_index])]
-        data = self.sample_function(state_index, frames, self.dataset.agents, self.dataset.tl_faces, track_id)
-        # 0,1,C -> C,0,1
-        image = data["image"].transpose(2, 0, 1)
 
-        target_positions = np.array(data["target_positions"], dtype=np.float32)
-        target_yaws = np.array(data["target_yaws"], dtype=np.float32)
+        tl_faces = self.dataset.tl_faces
+        try:
+            if self.cfg["raster_params"]["disable_traffic_light_faces"]:
+                tl_faces = np.empty(0, dtype=self.dataset.tl_faces.dtype)  # completely disable traffic light faces
+        except KeyError:
+            warnings.warn(
+                "disable_traffic_light_faces not found in config, this will raise an error in the future",
+                RuntimeWarning,
+                stacklevel=2,
+            )
+        data = self.sample_function(state_index, frames, self.dataset.agents, tl_faces, track_id)
 
-        history_positions = np.array(data["history_positions"], dtype=np.float32)
-        history_yaws = np.array(data["history_yaws"], dtype=np.float32)
+        # add information only, so that all data keys are always preserved
+        data["scene_index"] = scene_index
+        data["host_id"] = np.uint8(convert_str_to_fixed_length_tensor(self.dataset.scenes[scene_index]["host"]).cpu())
+        data["timestamp"] = frames[state_index]["timestamp"]
+        data["track_id"] = np.int64(-1 if track_id is None else track_id)  # always a number to avoid crashing torch
+        data["world_to_image"] = data["raster_from_world"]  # TODO deprecate
 
-        timestamp = frames[state_index]["timestamp"]
-        track_id = np.int64(-1 if track_id is None else track_id)  # always a number to avoid crashing torch
+        # when rast is None, image could be None. In that case we remove the key
+        if data["image"] is not None:
+            data["image"] = data["image"].transpose(2, 0, 1)  # 0,1,C -> C,0,1
+        else:
+            del data["image"]
 
-        return {
-            "image": image,
-            "target_positions": target_positions,
-            "target_yaws": target_yaws,
-            "target_availabilities": data["target_availabilities"],
-            "history_positions": history_positions,
-            "history_yaws": history_yaws,
-            "history_availabilities": data["history_availabilities"],
-            "world_to_image": data["world_to_image"],
-            "track_id": track_id,
-            "timestamp": timestamp,
-            "centroid": data["centroid"],
-            "yaw": data["yaw"],
-            "extent": data["extent"],
-        }
+        return data
 
     def __getitem__(self, index: int) -> dict:
         """
@@ -143,26 +144,7 @@ None if not desired
             EgoDataset: A valid EgoDataset dataset with a copy of the data
 
         """
-        # copy everything to avoid references (scene is already detached from zarr if get_combined_scene was called)
-        scenes = self.dataset.scenes[scene_index : scene_index + 1].copy()
-        frame_slice = get_frames_slice_from_scenes(*scenes)
-        frames = self.dataset.frames[frame_slice].copy()
-        agent_slice = get_agents_slice_from_frames(*frames[[0, -1]])
-        tl_slice = get_tl_faces_slice_from_frames(*frames[[0, -1]])
-
-        agents = self.dataset.agents[agent_slice].copy()
-        tl_faces = self.dataset.tl_faces[tl_slice].copy()
-
-        frames["agent_index_interval"] -= agent_slice.start
-        frames["traffic_light_faces_index_interval"] -= tl_slice.start
-        scenes["frame_index_interval"] -= frame_slice.start
-
-        dataset = ChunkedDataset("")
-        dataset.agents = agents
-        dataset.tl_faces = tl_faces
-        dataset.frames = frames
-        dataset.scenes = scenes
-
+        dataset = self.dataset.get_scene_dataset(scene_index)
         return EgoDataset(self.cfg, dataset, self.rasterizer, self.perturbation)
 
     def get_scene_indices(self, scene_idx: int) -> np.ndarray:

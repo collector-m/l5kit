@@ -1,7 +1,10 @@
+import math
 from typing import Tuple
 
 import numpy as np
 from scipy import optimize
+
+from l5kit.geometry import angular_distance
 
 
 def fit_ackerman_model_approximate(
@@ -19,15 +22,12 @@ def fit_ackerman_model_approximate(
     wgv: np.ndarray,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """
-Fits feasible ackerman-steering trajectory to groundtruth control points.
-Groundtruth is represented as 4 input numpy arrays ``(gx, gy, gr, gv)``
-each of size ``(N,)`` representing position, rotation and velocity at time ``i``.
-Returns 4 arrays ``(x, y, r, v)`` each of shape ``(N,)`` - the optimal trajectory.
-
-The solution is found as minimization of the following non-linear least squares problem:
-::
-    minimize F(x, y, r, v) = F_ground_cost(x, y, r, v) + F_kinematics_cost(x, y, r, v)
-    where
+    Fits feasible ackerman-steering trajectory to groundtruth control points.
+    Groundtruth is represented as 4 input numpy arrays ``(gx, gy, gr, gv)``
+    each of size ``(N,)`` representing position, rotation and velocity at time ``i``.
+    Returns 4 arrays ``(x, y, r, v)`` each of shape ``(N,)`` - the optimal trajectory.
+    The solution is found as minimization of the following non-linear least squares problem:
+    minimize F(x, y, r, v) = F_ground_cost(x, y, r, v) + F_kinematics_cost(x, y, r, v) where
     F_ground_cost(x, y, r, v) = 0.5 * sum(
     (wgx[i] * (x[i] - gx[i])) ** 2 +
     (wgy[i] * (y[i] - gy[i])) ** 2 +
@@ -41,14 +41,10 @@ The solution is found as minimization of the following non-linear least squares 
     (wr * (r[i] - r[i+1])) ** 2 +
     (wv * (v[i] - v[i+1])) ** 2,
     i = 0 ... N-2)
+    Weights wg* control adherance to the control points while
+    weights w* control obeying of underlying kinematic motion constrains.
 
-Weights wg* control adherance to the control points while
-weights w* control obeying of underlying kinematic motion constrains.
-
-Returns:
-    Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray] -- Returns 4 arrays (x, y, r, v) each of shape (N,),
-    the optimal trajectory.
-
+    :return: 4 arrays (x, y, r, v) each of shape (N,), the optimal trajectory.
     """
 
     N = len(gx)
@@ -58,20 +54,20 @@ Returns:
     def residuals(xyrv: np.ndarray) -> np.ndarray:
         x, y, r, v = np.split(xyrv, 4)
 
-        x1, x2 = x[0 : N - 1], x[1:N]
-        y1, y2 = y[0 : N - 1], y[1:N]
-        r1, r2 = r[0 : N - 1], r[1:N]
-        v1, v2 = v[0 : N - 1], v[1:N]
+        x1, x2 = x[0:N - 1], x[1:N]
+        y1, y2 = y[0:N - 1], y[1:N]
+        r1, r2 = r[0:N - 1], r[1:N]
+        v1, v2 = v[0:N - 1], v[1:N]
 
         return w * np.hstack(
             [
                 x - gx,
                 y - gy,
-                r - gr,
+                angular_distance(r, gr),
                 v - gv,
                 np.append(x1 + np.cos(r1) * v1 - x2, 0),
                 np.append(y1 + np.sin(r1) * v1 - y2, 0),
-                np.append(r1 - r2, 0),
+                np.append(angular_distance(r1, r2), 0),
                 np.append(v1 - v2, 0),
             ]
         )
@@ -123,19 +119,19 @@ def fit_ackerman_model_exact(
     wgv: np.ndarray,
     ws: float = 5.0,
     wa: float = 5.0,
-    min_acc: float = -0.1,
-    max_acc: float = 0.1,
-    min_steer: float = -0.2,
-    max_steer: float = 0.2,
+    min_acc: float = -0.3,  # min acceleration: -3 mps2
+    max_acc: float = 0.3,   # max acceleration: 3 mps2
+    min_steer: float = -math.radians(45) * 0.1,  # max yaw rate: 45 degrees per second
+    max_steer: float = math.radians(45) * 0.1,   # max yaw rate: 45 degrees per second
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """
-Fits feasible ackerman-steering trajectory to groundtruth control points.
-Groundtruth is represented as 4 numpy arrays ``(gx, gy, gr, gv)``
-each of shape ``(N,)`` representing position, rotation and velocity at time i.
-Returns 4 arrays ``(x, y, r, v)`` each of shape ``(N,)`` - the optimal trajectory.
+    Fits feasible ackerman-steering trajectory to groundtruth control points.
+    Groundtruth is represented as 4 numpy arrays ``(gx, gy, gr, gv)``
+    each of shape ``(N,)`` representing position, rotation and velocity at time i.
+    Returns 4 arrays ``(x, y, r, v)`` each of shape ``(N,)`` - the optimal trajectory.
 
-The solution is found as minimisation of the following non-linear least squares problem:
-::
+    The solution is found as minimisation of the following non-linear least squares problem:
+    ::
     minimize F(steer, acc) = 0.5 * sum(
     (wgx[i] * (x[i] - gx[i])) ** 2 +
     (wgy[i] * (y[i] - gy[i])) ** 2 +
@@ -152,15 +148,10 @@ The solution is found as minimisation of the following non-linear least squares 
     min_steer < steer[i] < max_steer
     min_acc < acc[i] < max_acc
     for i = 0 .. N
+    Weights ``wg*`` control adherence to the control points
+    In a typical usecase ``wgx = wgy = 1`` and ``wgr = wgv = 0``
 
-
-Weights ``wg*`` control adherence to the control points
-In a typical usecase ``wgx = wgy = 1`` and ``wgr = wgv = 0``
-
-Returns:
-    [Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]] -- 4 arrays ``(x, y, r, v)`` each of shape ``(N,)``
-- the optimal trajectory.
-
+    :return: 4 arrays ``(x, y, r, v)`` each of shape ``(N,)``- the optimal trajectory.
     """
     N = len(gx)
 
@@ -176,7 +167,15 @@ Returns:
 
     def residuals(steer_acc: np.ndarray) -> np.ndarray:
         x, y, r, v = control2position(steer_acc)
-        return np.hstack([wgx * (x - gx), wgy * (y - gy), wgr * (r - gr), wgv * (v - gv), wsteer_acc * steer_acc])
+        return np.hstack(
+            [
+                wgx * (x - gx),
+                wgy * (y - gy),
+                wgr * angular_distance(r, gr),
+                wgv * (v - gv),
+                wsteer_acc * steer_acc,
+            ]
+        )
 
     def jacobian(steer_acc: np.ndarray) -> np.ndarray:
         x, y, r, v = control2position(steer_acc)

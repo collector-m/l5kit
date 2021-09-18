@@ -3,42 +3,46 @@ from setuptools import find_packages, setup
 
 from l5kit import __version__
 
+
 setup(
     name="l5kit",
     version=__version__,
-    description="Lyft Autonomous Vehicle Research library",
-    author="Lyft Level 5",
+    description="Level-5 Autonomous Vehicle Research library",
+    author="Level 5",
     author_email="l5kit@lyft.com",
     url="https://github.com/lyft/l5kit",
     license="apache2",
     install_requires=[
         "imageio",
         "matplotlib",
-        "numpy",
+        "numpy~=1.19.0",
         "opencv-contrib-python-headless",
-        "protobuf==3.12.2",
+        "protobuf>=3.12.2",
         "pymap3d",
         "scipy",
         "setuptools",
-        "torch>=1.5.0,<1.6.0",
-        "torchvision>=0.6.0,<0.7.0",
+        "torch>=1.5.0,<2.0.0",
+        "torchvision>=0.6.0,<1.0.0",
         "tqdm",
         "transforms3d",
         "zarr",
         "pyyaml",
         "notebook",
         "ptable",
-        "ipywidgets"
+        "ipywidgets",
+        "shapely",
+        "typing_extensions",
+        "bokeh",
+        "gym"
     ],
     extras_require={
-        "dev": ["pytest==5.4.3", "mypy==0.782", "setuptools", "twine", "wheel", "pytest-cov==2.10.0", "flake8==3.8.3",
-                "black==19.10b0", "isort==5.0.4", "Sphinx==3.1.1", "sphinx-rtd-theme==0.5.0", "recommonmark==0.6.0",
-                "pre-commit==2.5.1"]
+        "dev": ["pytest", "mypy", "types-PyYAML", "setuptools", "twine", "wheel", "pytest-cov",
+                "flake8", "isort", "Sphinx", "recommonmark",
+                "pre-commit", "sphinx-press-theme"]
     },
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     classifiers=[
         "Development Status :: 3 - Alpha",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
     ],

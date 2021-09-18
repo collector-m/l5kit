@@ -3,9 +3,10 @@ import multiprocessing
 import os
 import pprint
 import sys
+import warnings
 from collections import Counter, defaultdict
 from functools import partial
-from multiprocessing import Pool, cpu_count
+from multiprocessing import cpu_count, Pool
 from pathlib import Path
 from tempfile import gettempdir
 from typing import Tuple
@@ -20,10 +21,17 @@ from l5kit.data import ChunkedDataset
 from l5kit.data.filter import _get_label_filter  # TODO expose this without digging
 from l5kit.geometry import angular_distance
 
+
 if sys.platform == "darwin":
     multiprocessing.set_start_method("fork", force=True)  # this fixes loop in python 3.8 on MacOS
 
-os.environ["BLOSC_NOLOCK"] = "1"  # this is required for multiprocessing
+if sys.platform not in ["win32", "cygwin"]:
+    os.environ["BLOSC_NOLOCK"] = "1"  # this is required for multiprocessing
+else:
+    warnings.warn(
+        "Windows detected. BLOSC_NOLOCK has not been set as it causes memory leaks on Windows."
+        "However, writing the mask with this config may be inconsistent."
+    )
 
 TH_YAW_DEGREE = 30
 TH_EXTENT_RATIO = 1.1
@@ -43,7 +51,7 @@ def in_angular_distance(yaw1: np.ndarray, yaw2: np.ndarray, th: float) -> bool:
     Check if the absolute distance in degrees is under the given threshold
     """
 
-    abs_angular_distance_degrees = abs(angular_distance(float(yaw2), float(yaw1))) * 180 / np.pi
+    abs_angular_distance_degrees = abs(angular_distance(yaw2, yaw1)) * 180 / np.pi
     return bool(abs_angular_distance_degrees < th)
 
 
@@ -66,12 +74,12 @@ def update_mask(mask: np.ndarray, agent_list: list) -> None:
 
 
 def get_valid_agents(
-    frames_range: np.ndarray,
-    dataset: ChunkedDataset,
-    th_agent_filter_probability_threshold: float,
-    th_yaw_degree: float,
-    th_extent_ratio: float,
-    th_distance_av: float,
+        frames_range: np.ndarray,
+        dataset: ChunkedDataset,
+        th_agent_filter_probability_threshold: float,
+        th_yaw_degree: float,
+        th_extent_ratio: float,
+        th_distance_av: float,
 ) -> Tuple[np.ndarray, Counter, tuple]:
     """
     Two types of filters are implemented:
@@ -151,11 +159,11 @@ def get_valid_agents(
 
 
 def select_agents(
-    zarr_dataset: ChunkedDataset,
-    th_agent_prob: float,
-    th_yaw_degree: float,
-    th_extent_ratio: float,
-    th_distance_av: float,
+        zarr_dataset: ChunkedDataset,
+        th_agent_prob: float,
+        th_yaw_degree: float,
+        th_extent_ratio: float,
+        th_distance_av: float,
 ) -> None:
     """
     Filter agents from zarr INPUT_FOLDER according to multiple thresholds and store a boolean array of the same shape.
@@ -198,7 +206,7 @@ def select_agents(
         tasks = tqdm(enumerate(pool.imap_unordered(get_valid_agents_partial, frame_index_intervals)))
         for idx, (mask, count, agents_range) in tasks:
             report += count
-            agents_mask[agents_range[0] : agents_range[1]] = mask
+            agents_mask[agents_range[0]: agents_range[1]] = mask
             tasks.set_description(f"{idx + 1}/{len(frame_index_intervals)}")
         print("collecting results..")
 

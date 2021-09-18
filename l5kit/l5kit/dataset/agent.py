@@ -1,4 +1,5 @@
 import bisect
+import warnings
 from pathlib import Path
 from typing import Optional
 
@@ -9,7 +10,8 @@ from ..data import ChunkedDataset, get_agents_slice_from_frames, get_frames_slic
 from ..kinematic import Perturbation
 from ..rasterization import Rasterizer
 from .ego import EgoDataset
-from .select_agents import TH_DISTANCE_AV, TH_EXTENT_RATIO, TH_YAW_DEGREE, select_agents
+from .select_agents import select_agents, TH_DISTANCE_AV, TH_EXTENT_RATIO, TH_YAW_DEGREE
+
 
 # WARNING: changing these values impact the number of instances selected for both train and inference!
 MIN_FRAME_HISTORY = 10  # minimum number of frames an agents must have in the past to be picked
@@ -18,14 +20,14 @@ MIN_FRAME_FUTURE = 1  # minimum number of frames an agents must have in the futu
 
 class AgentDataset(EgoDataset):
     def __init__(
-        self,
-        cfg: dict,
-        zarr_dataset: ChunkedDataset,
-        rasterizer: Rasterizer,
-        perturbation: Optional[Perturbation] = None,
-        agents_mask: Optional[np.ndarray] = None,
-        min_frame_history: int = MIN_FRAME_HISTORY,
-        min_frame_future: int = MIN_FRAME_FUTURE,
+            self,
+            cfg: dict,
+            zarr_dataset: ChunkedDataset,
+            rasterizer: Rasterizer,
+            perturbation: Optional[Perturbation] = None,
+            agents_mask: Optional[np.ndarray] = None,
+            min_frame_history: int = MIN_FRAME_HISTORY,
+            min_frame_future: int = MIN_FRAME_FUTURE,
     ):
         assert perturbation is None, "AgentDataset does not support perturbation (yet)"
 
@@ -37,14 +39,26 @@ class AgentDataset(EgoDataset):
             agents_mask = past_mask * future_mask
 
             if min_frame_history != MIN_FRAME_HISTORY:
-                print(f"warning, you're running with custom min_frame_history of {min_frame_history}")
+                warnings.warn(
+                    f"you're running with custom min_frame_history of {min_frame_history}",
+                    RuntimeWarning,
+                    stacklevel=2,
+                )
             if min_frame_future != MIN_FRAME_FUTURE:
-                print(f"warning, you're running with custom min_frame_future of {min_frame_future}")
+                warnings.warn(
+                    f"you're running with custom min_frame_future of {min_frame_future}", RuntimeWarning, stacklevel=2
+                )
         else:
-            print("warning, you're running with a custom agents_mask")
+            warnings.warn("you're running with a custom agents_mask", RuntimeWarning, stacklevel=2)
 
-        # store the valid agents indexes
+        # store the valid agents indices (N_valid_agents,)
         self.agents_indices = np.nonzero(agents_mask)[0]
+
+        # store an array where valid indices have increasing numbers and the rest is -1 (N_total_agents,)
+        self.mask_indices = agents_mask.copy().astype(np.int)
+        self.mask_indices[self.mask_indices == 0] = -1
+        self.mask_indices[self.mask_indices == 1] = np.arange(0, np.sum(agents_mask))
+
         # this will be used to get the frame idx from the agent idx
         self.cumulative_sizes_agents = self.dataset.frames["agent_index_interval"][:, 1]
         self.agents_mask = agents_mask
@@ -59,12 +73,15 @@ class AgentDataset(EgoDataset):
 
         agents_mask_path = Path(self.dataset.path) / f"agents_mask/{agent_prob}"
         if not agents_mask_path.exists():  # don't check in root but check for the path
-            print(
+            warnings.warn(
                 f"cannot find the right config in {self.dataset.path},\n"
                 f"your cfg has loaded filter_agents_threshold={agent_prob};\n"
                 "but that value doesn't have a match among the agents_mask in the zarr\n"
-                "Mask will now be generated for that parameter."
+                "Mask will now be generated for that parameter.",
+                RuntimeWarning,
+                stacklevel=2,
             )
+
             select_agents(
                 self.dataset,
                 agent_prob,
@@ -152,11 +169,12 @@ class AgentDataset(EgoDataset):
         Returns:
             np.ndarray: indices that can be used for indexing with __getitem__
         """
-        frames = self.dataset.frames
-        assert frame_idx < len(frames), f"frame_idx {frame_idx} is over len {len(frames)}"
+        assert frame_idx < len(self.dataset.frames), f"frame_idx {frame_idx} is over len {len(self.dataset.frames)}"
 
-        agent_slice = get_agents_slice_from_frames(frames[frame_idx])
-
-        mask_valid_indices = (self.agents_indices >= agent_slice.start) * (self.agents_indices < agent_slice.stop)
-        indices = np.nonzero(mask_valid_indices)[0]
+        # avoid using `get_agents_slice_from_frames` as it hits the disk
+        agent_start = self.cumulative_sizes_agents[frame_idx - 1] if frame_idx > 0 else 0
+        agent_end = self.cumulative_sizes_agents[frame_idx]
+        # slice using frame boundaries and take only valid indices
+        mask_idx = self.mask_indices[agent_start:agent_end]
+        indices = mask_idx[mask_idx != -1]
         return indices

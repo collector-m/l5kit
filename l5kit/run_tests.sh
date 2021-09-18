@@ -15,9 +15,6 @@ echo "Using python interpreter: ${PYTHON_EXECUTABLE}"
 lint() {
     echo "linting.."
     ${PYTHON_EXECUTABLE} -m flake8 --config .flake8 --show-source --statistics --jobs auto l5kit
-
-    echo "blacking.."
-    ${PYTHON_EXECUTABLE} -m black --diff --check l5kit
 }
 
 isort() {
@@ -32,7 +29,7 @@ types() {
 
 tests() {
     echo "Testing.."
-    ${PYTHON_EXECUTABLE} -m pytest --cov l5kit
+    ${PYTHON_EXECUTABLE} -m pytest --cache-clear --cov l5kit
 }
 
 if [ "${TEST_TYPE}" = "lint" ] ; then

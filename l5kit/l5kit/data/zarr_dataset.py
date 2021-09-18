@@ -1,10 +1,13 @@
+import warnings
 from pathlib import Path
 
 import numpy as np
 import zarr
 from prettytable import PrettyTable
 
+from .filter import get_agents_slice_from_frames, get_frames_slice_from_scenes, get_tl_faces_slice_from_frames
 from .labels import PERCEPTION_LABELS, TL_FACE_LABELS
+
 
 # When changing the schema bump this number
 FORMAT_VERSION = 2
@@ -46,14 +49,13 @@ AGENT_DTYPE = [
 TL_FACE_DTYPE = [
     ("face_id", "<U16"),
     ("traffic_light_id", "<U16"),
-    ("traffic_light_face_status", np.float32, (len(TL_FACE_LABELS,))),
+    ("traffic_light_face_status", np.float32, (len(TL_FACE_LABELS, ))),
 ]
 
 
 class ChunkedDataset:
     """ChunkedDataset is a dataset that lives on disk in compressed chunks, it has easy to use data loading and
     writing interfaces that involves making numpy-like slices.
-
     Currently only .zarr directory stores are supported (i.e. the data will live in a folder on your
     local filesystem called <something>.zarr).
     """
@@ -62,14 +64,8 @@ class ChunkedDataset:
         """Creates a new handle for the dataset, does NOT initialize or open it yet, use respective methods for that.
         Right now only DirectoryStore is supported.
 
-        Arguments:
-            path (str): Path on disk where to write this dataset, should end in ``.zarr``.
-
-        Keyword Arguments:
-            key (str): Key in the zarr group to write under, you probably never need to change this (default: {""})
-
-        Raises:
-            Exception: An exception is raised when the path does not end in .zarr
+        :param path: Path on disk where to write this dataset, should end in ``.zarr``.
+        :param key: Key in the zarr group to write under, you probably never need to change this (default: {""})
         """
         self.key = key
         self.path = path
@@ -80,21 +76,26 @@ class ChunkedDataset:
 
         # Note: we still support only zarr. However, some functions build a new dataset so we cannot raise error.
         if ".zarr" not in self.path:
-            print("zarr dataset path should end with .zarr (for now). Open will fail for this dataset!")
+            warnings.warn(
+                "zarr dataset path should end with .zarr (for now). Open will fail for this dataset!",
+                RuntimeWarning,
+                stacklevel=2,
+            )
         if not Path(self.path).exists():
-            print("zarr dataset path doesn't exist. Open will fail for this dataset!")
+            warnings.warn(
+                "zarr dataset path doesn't exist. Open will fail for this dataset!", RuntimeWarning, stacklevel=2
+            )
 
     def initialize(
-        self, mode: str = "w", num_scenes: int = 0, num_frames: int = 0, num_agents: int = 0, num_tl_faces: int = 0
+            self, mode: str = "w", num_scenes: int = 0, num_frames: int = 0, num_agents: int = 0, num_tl_faces: int = 0
     ) -> "ChunkedDataset":
         """Initializes a new zarr dataset, creating the underlying arrays.
 
-        Keyword Arguments:
-            mode (str): Mode to open dataset in, should be something that supports writing. (default: {"w"})
-            num_scenes (int): pre-allocate this number of scenes
-            num_frames (int): pre-allocate this number of frames
-            num_agents (int): pre-allocate this number of agents
-            num_tl_faces (int): pre-allocate this number of traffic lights
+        :param mode: Mode to open dataset in, should be something that supports writing. (default: {"w"})
+        :param num_scenes: pre-allocate this number of scenes
+        :param num_frames: pre-allocate this number of frames
+        :param num_agents: pre-allocate this number of agents
+        :param num_tl_faces: pre-allocate this number of traffic lights
         """
 
         self.root = zarr.open_group(self.path, mode=mode)
@@ -119,14 +120,9 @@ class ChunkedDataset:
     def open(self, mode: str = "r", cached: bool = True, cache_size_bytes: int = int(1e9)) -> "ChunkedDataset":
         """Opens a zarr dataset from disk from the path supplied in the constructor.
 
-        Keyword Arguments:
-            mode (str): Mode to open dataset in, default to read-only (default: {"r"})
-            cached (bool): Whether to cache files read from disk using a LRU cache. (default: {True})
-            cache_size_bytes (int): Size of cache in bytes (default: {1e9} (1GB))
-
-        Raises:
-            Exception: When any of the expected arrays (frames, agents, scenes) is missing or the store couldn't be
-opened.
+        :param mode: Mode to open dataset in, default to read-only (default: {"r"})
+        :param cached: Whether to cache files read from disk using a LRU cache. (default: {True})
+        :param cache_size_bytes: Size of cache in bytes (default: {1e9} (1GB))
         """
         if cached:
             self.root = zarr.open_group(
@@ -140,7 +136,13 @@ opened.
         try:
             self.tl_faces = self.root[TL_FACE_ARRAY_KEY]
         except KeyError:
-            print(f"{TL_FACE_ARRAY_KEY} not found in {self.path}! Traffic lights will be disabled")
+            # the real issue here is that frame doesn't have traffic_light_faces_index_interval
+            warnings.warn(
+                f"{TL_FACE_ARRAY_KEY} not found in {self.path}! "
+                f"You won't be able to use this zarr into an Ego/AgentDataset",
+                RuntimeWarning,
+                stacklevel=2,
+            )
             self.tl_faces = np.empty((0,), dtype=TL_FACE_DTYPE)
         return self
 
@@ -150,6 +152,7 @@ opened.
             "Num Scenes",
             "Num Frames",
             "Num Agents",
+            "Num TR lights",
             "Total Time (hr)",
             "Avg Frames per Scene",
             "Avg Agents per Frame",
@@ -158,16 +161,21 @@ opened.
         ]
         if len(self.frames) > 1:
             # read a small chunk of frames to speed things up
-            times = self.frames[1:50]["timestamp"] - self.frames[0:49]["timestamp"]
+            times = np.diff(self.frames[:50]["timestamp"])
             frequency = np.mean(1 / (times / 1e9))  # from nano to sec
         else:
-            print(f"warning, not enough frames({len(self.frames)}) to read the frequency, 10 will be set")
+            warnings.warn(
+                f"not enough frames({len(self.frames)}) to read the frequency, 10 will be set",
+                RuntimeWarning,
+                stacklevel=2,
+            )
             frequency = 10
 
         values = [
             len(self.scenes),
             len(self.frames),
             len(self.agents),
+            len(self.tl_faces),
             len(self.frames) / max(frequency, 1) / 3600,
             len(self.frames) / max(len(self.scenes), 1),
             len(self.agents) / max(len(self.frames), 1),
@@ -178,3 +186,34 @@ opened.
         table.float_format = ".2"
         table.add_row(values)
         return str(table)
+
+    def get_scene_dataset(self, scene_index: int) -> "ChunkedDataset":
+        """Get a new ChunkedDataset of a single scene.
+        This dataset lives in memory (as np.ndarray)
+
+        :param scene_index: the scene index
+        :return: a dataset with a single scene inside
+        """
+        if scene_index >= len(self.scenes):
+            raise ValueError(f"scene index {scene_index} out of bound for dataset with {len(self.scenes)} scenes")
+
+        scenes = self.scenes[scene_index: scene_index + 1].copy()
+        frame_slice = get_frames_slice_from_scenes(*scenes)
+        frames = self.frames[frame_slice].copy()
+        agent_slice = get_agents_slice_from_frames(*frames[[0, -1]])
+        tl_slice = get_tl_faces_slice_from_frames(*frames[[0, -1]])
+
+        agents = self.agents[agent_slice].copy()
+        tl_faces = self.tl_faces[tl_slice].copy()
+
+        frames["agent_index_interval"] -= agent_slice.start
+        frames["traffic_light_faces_index_interval"] -= tl_slice.start
+        scenes["frame_index_interval"] -= frame_slice.start
+
+        dataset = ChunkedDataset("")
+        dataset.agents = agents
+        dataset.tl_faces = tl_faces
+        dataset.frames = frames
+        dataset.scenes = scenes
+
+        return dataset

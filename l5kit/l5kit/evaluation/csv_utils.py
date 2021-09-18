@@ -4,6 +4,7 @@ from typing import Iterator, List, Optional
 
 import numpy as np
 
+
 MAX_MODES = 3
 
 """
@@ -65,7 +66,7 @@ def _generate_confs_keys() -> List[str]:
 
 
 def write_gt_csv(
-    csv_path: str, timestamps: np.ndarray, track_ids: np.ndarray, coords: np.ndarray, avails: np.ndarray
+        csv_path: str, timestamps: np.ndarray, track_ids: np.ndarray, coords: np.ndarray, avails: np.ndarray
 ) -> None:
     """
     Encode the ground truth into a csv file
@@ -138,14 +139,14 @@ def read_gt_csv(csv_path: str) -> Iterator[dict]:
 
 
 def write_pred_csv(
-    csv_path: str,
-    timestamps: np.ndarray,
-    track_ids: np.ndarray,
-    coords: np.ndarray,
-    confs: Optional[np.ndarray] = None,
+        csv_path: str,
+        timestamps: np.ndarray,
+        track_ids: np.ndarray,
+        coords: np.ndarray,
+        confs: Optional[np.ndarray] = None,
 ) -> None:
     """
-    Encode the ground truth into a csv file. Coords can have an additional axis for multi-mode.
+    Encode the predictions into a csv file. Coords can have an additional axis for multi-mode.
     We handle up to MAX_MODES modes.
     For the uni-modal case (i.e. all predictions have just a single mode), coords should not have the additional axis
     and confs should be set to None. In this case, a single mode with confidence 1 will be written.

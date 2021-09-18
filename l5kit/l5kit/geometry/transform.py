@@ -1,8 +1,28 @@
-from typing import Optional, Sequence, Tuple, Union, cast
+from typing import cast, Sequence, Union
 
 import numpy as np
 import pymap3d as pm
 import transforms3d
+
+
+def compute_agent_pose(agent_centroid_m: np.ndarray, agent_yaw_rad: float) -> np.ndarray:
+    """Return the agent pose as a 3x3 matrix. This corresponds to world_from_agent matrix.
+
+    Args:
+        agent_centroid_m (np.ndarry): 2D coordinates of the agent
+        agent_yaw_rad (float): yaw of the agent
+
+    Returns:
+        (np.ndarray): 3x3 world_from_agent matrix
+    """
+    # Compute agent pose from its position and heading
+    return np.array(
+        [
+            [np.cos(agent_yaw_rad), -np.sin(agent_yaw_rad), agent_centroid_m[0]],
+            [np.sin(agent_yaw_rad), np.cos(agent_yaw_rad), agent_centroid_m[1]],
+            [0, 0, 1],
+        ]
+    )
 
 
 def rotation33_as_yaw(rotation: np.ndarray) -> float:
@@ -33,58 +53,8 @@ def yaw_as_rotation33(yaw: float) -> np.ndarray:
     return transforms3d.euler.euler2mat(0, 0, yaw)
 
 
-def world_to_image_pixels_matrix(
-    image_shape: Tuple[int, int],
-    pixel_size_m: np.ndarray,
-    ego_translation_m: np.ndarray,
-    ego_yaw_rad: Optional[float] = None,
-    ego_center_in_image_ratio: Optional[np.ndarray] = None,
-) -> np.ndarray:
-    """
-    Constructs a transformation matrix from world coordinates to image pixels.
-    Note: we're ignoring Z coord, with the assumption that it won't change dramatically.
-    This means last row of the matrix will be [0,0,1] and we will transform 2D points in fact (X,Y)
-
-        Args:
-        image_shape (Tuple[int, int]): the size of the image
-        pixel_size_m (np.ndarray): how many meters a pixel cover in the two directions
-        ego_translation_m (np.ndarray): translation of the ego in meters in world-coordinates
-        ego_yaw_rad (Optional[float]):if defined, rotation is applied so that ego will always face to the right
-         in the resulting image coordinates
-        ego_center_in_image_ratio (Optional[np.ndarray]): enables to position the ego in different places
-         in the resulting image. The [0.5, 0.5] value puts it in the center
-
-    Returns:
-        np.ndarray: 3x3 transformation matrix
-    """
-
-    # Translate world to ego by applying the negative ego translation.
-    world_to_ego_in_2d = np.eye(3, dtype=np.float32)
-    world_to_ego_in_2d[0:2, 2] = -ego_translation_m[0:2]
-
-    if ego_yaw_rad is not None:
-        # Rotate counter-clockwise by negative yaw to align world such that ego faces right.
-        world_to_ego_in_2d = yaw_as_rotation33(-ego_yaw_rad) @ world_to_ego_in_2d
-
-    # Scale the meters to pixels.
-    world_to_image_scale = np.eye(3)
-    world_to_image_scale[0, 0] = 1.0 / pixel_size_m[0]
-    world_to_image_scale[1, 1] = 1.0 / pixel_size_m[1]
-
-    # Move so that it is aligned to the defined image center.
-    if ego_center_in_image_ratio is None:
-        ego_center_in_image_ratio = np.array([0.5, 0.5])
-    ego_center_in_pixels = ego_center_in_image_ratio * image_shape
-    image_to_ego_center = np.eye(3)
-    image_to_ego_center[0:2, 2] = ego_center_in_pixels
-
-    # Construct the whole transform and return it.
-    return image_to_ego_center @ world_to_image_scale @ world_to_ego_in_2d
-
-
-def flip_y_axis(tm: np.ndarray, y_dim_size: int) -> np.ndarray:
-    """
-    Return a new matrix that also performs a flip on the y axis.
+def vertical_flip(tm: np.ndarray, y_dim_size: int) -> np.ndarray:
+    """Return a new matrix that also performs a flip on the y axis.
 
     Args:
         tm: the original 3x3 matrix
@@ -102,65 +72,69 @@ def flip_y_axis(tm: np.ndarray, y_dim_size: int) -> np.ndarray:
 
 def transform_points(points: np.ndarray, transf_matrix: np.ndarray) -> np.ndarray:
     """
-    Transform points using transformation matrix.
+    Transform a set of 2D/3D points using the given transformation matrix.
+    Assumes row major ordering of the input points. The transform function has 3 modes:
+    - points (N, F), transf_matrix (F+1, F+1)
+    all points are transformed using the matrix and the output points have shape (N, F).
+    - points (B, N, F), transf_matrix (F+1, F+1)
+    all sequences of points are transformed using the same matrix and the output points have shape (B, N, F).
+    transf_matrix is broadcasted.
+    - points (B, N, F), transf_matrix (B, F+1, F+1)
+    each sequence of points is transformed using its own matrix and the output points have shape (B, N, F).
+    Note this function assumes points.shape[-1] == matrix.shape[-1] - 1, which means that last
+    rows in the matrices do not influence the final results.
+    For 2D points only the first 2x3 parts of the matrices will be used.
 
-    Args:
-        points (np.ndarray): Input points (Nx2), (Nx3) or (Nx4).
-        transf_matrix (np.ndarray): 3x3 or 4x4 transformation matrix for 2D and 3D input respectively
-
-    Returns:
-        np.ndarray: array of shape (N,2) for 2D input points, or (N,3) points for 3D input points
+    :param points: Input points of shape (N, F) or (B, N, F)
+        with F = 2 or 3 depending on input points are 2D or 3D points.
+    :param transf_matrix: Transformation matrix of shape (F+1, F+1) or (B, F+1, F+1) with F = 2 or 3.
+    :return: Transformed points of shape (N, F) or (B, N, F) depending on the dimensions of the input points.
     """
-    # TODO: Surely we can do this without transposing.
-    return transform_points_transposed(points.transpose(1, 0), transf_matrix).transpose(1, 0)
+    points_log = f" received points with shape {points.shape} "
+    matrix_log = f" received matrices with shape {transf_matrix.shape} "
 
+    assert points.ndim in [2, 3], f"points should have ndim in [2,3],{points_log}"
+    assert transf_matrix.ndim in [2, 3], f"matrix should have ndim in [2,3],{matrix_log}"
+    assert points.ndim >= transf_matrix.ndim, f"points ndim should be >= than matrix,{points_log},{matrix_log}"
 
-def transform_points_transposed(points: np.ndarray, transf_matrix: np.ndarray) -> np.ndarray:
-    """
-    Transform points using transformation matrix.
+    points_feat = points.shape[-1]
+    assert points_feat in [2, 3], f"last points dimension must be 2 or 3,{points_log}"
+    assert transf_matrix.shape[-1] == transf_matrix.shape[-2], f"matrix should be a square matrix,{matrix_log}"
 
-    Args:
-        points (np.ndarray): Input points (2xN), (3xN) or (4xN).
-        transf_matrix (np.ndarray): 3x3 or 4x4 transformation matrix for 2D and 3D input respectively
+    matrix_feat = transf_matrix.shape[-1]
+    assert matrix_feat in [3, 4], f"last matrix dimension must be 3 or 4,{matrix_log}"
+    assert points_feat == matrix_feat - 1, f"points last dim should be one less than matrix,{points_log},{matrix_log}"
 
-    Returns:
-        np.ndarray: array of shape (2,N) for 2D input points, or (3,N) points for 3D input points
-    """
-    num_dims = transf_matrix.shape[0] - 1
-    if points.shape[0] not in [2, 3, 4]:
-        raise ValueError("Points input should be (2, N), (3,N) or (4,N) shape, received {}".format(points.shape))
+    def _transform(points: np.ndarray, transf_matrix: np.ndarray) -> np.ndarray:
+        num_dims = transf_matrix.shape[-1] - 1
+        transf_matrix = np.transpose(transf_matrix, (0, 2, 1))
+        return points @ transf_matrix[:, :num_dims, :num_dims] + transf_matrix[:, -1:, :num_dims]
 
-    return transf_matrix.dot(np.vstack((points[:num_dims, :], np.ones(points.shape[1]))))[:num_dims, :]
+    if points.ndim == transf_matrix.ndim == 2:
+        points = np.expand_dims(points, 0)
+        transf_matrix = np.expand_dims(transf_matrix, 0)
+        return _transform(points, transf_matrix)[0]
+
+    elif points.ndim == transf_matrix.ndim == 3:
+        return _transform(points, transf_matrix)
+
+    elif points.ndim == 3 and transf_matrix.ndim == 2:
+        transf_matrix = np.expand_dims(transf_matrix, 0)
+        return _transform(points, transf_matrix)
+    else:
+        raise NotImplementedError(f"unsupported case!{points_log},{matrix_log}")
 
 
 def transform_point(point: np.ndarray, transf_matrix: np.ndarray) -> np.ndarray:
-    """ Transform a single vector using transformation matrix.
+    """Transform a single vector using transformation matrix.
+    This function call transform_points internally
 
-    Args:
-        point (np.ndarray): vector of shape (N)
-        transf_matrix (np.ndarray): transformation matrix of shape (N+1, N+1)
-
-    Returns:
-        np.ndarray: vector of same shape as input point
+    :param point: vector of shape (N)
+    :param transf_matrix: transformation matrix of shape (N+1, N+1)
+    :return: vector of same shape as input point
     """
-    point_ext = np.hstack((point, np.ones(1)))
-    return np.matmul(transf_matrix, point_ext)[: point.shape[0]]
-
-
-def get_transformation_matrix(translation: np.ndarray, rotation: np.ndarray) -> np.ndarray:
-    """
-    Get a 3D transformation matrix from translation vector and quaternion rotation
-
-    Args:
-        translation (np.ndarray): 3D translation vector
-        rotation (np.ndarray): 4 quaternion values
-
-    Returns:
-        np.ndarray: 4x4 transformation matrix
-    """
-    rot_mat = transforms3d.quaternions.quat2mat(rotation)
-    tr = transforms3d.affines.compose(translation, rot_mat, np.ones(3))
-    return tr
+    point = np.expand_dims(point, 0)
+    return transform_points(point, transf_matrix)[0]
 
 
 def ecef_to_geodetic(point: Union[np.ndarray, Sequence[float]]) -> np.ndarray:

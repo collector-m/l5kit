@@ -1,34 +1,19 @@
-import json
-from typing import Tuple, cast
+import warnings
 
 import cv2
 import numpy as np
 
+from l5kit.configs.config import load_metadata
+
 from ..data import DataManager
 from .box_rasterizer import BoxRasterizer
 from .rasterizer import Rasterizer
+from .render_context import RenderContext
 from .sat_box_rasterizer import SatBoxRasterizer
 from .satellite_rasterizer import SatelliteRasterizer
 from .sem_box_rasterizer import SemBoxRasterizer
 from .semantic_rasterizer import SemanticRasterizer
 from .stub_rasterizer import StubRasterizer
-
-
-def _load_metadata(meta_key: str, data_manager: DataManager) -> dict:
-    """
-    Load a json metadata file
-
-    Args:
-        meta_key (str): relative key to the metadata
-        data_manager (DataManager): DataManager used for requiring files
-
-    Returns:
-        dict: metadata as a dict
-    """
-    metadata_path = data_manager.require(meta_key)
-    with open(metadata_path, "r") as f:
-        metadata: dict = json.load(f)
-    return metadata
 
 
 def _load_satellite_map(image_key: str, data_manager: DataManager) -> np.ndarray:
@@ -57,10 +42,13 @@ def get_hardcoded_world_to_ecef() -> np.ndarray:  # TODO remove when new dataset
     Returns:
         np.ndarray: 4x4 matrix
     """
-    print(
+    warnings.warn(
         "!!dataset metafile not found!! the hard-coded matrix will be loaded.\n"
-        "This will be deprecated in future releases"
+        "This will be deprecated in future releases",
+        PendingDeprecationWarning,
+        stacklevel=3,
     )
+
     world_to_ecef = np.asarray(
         [
             [8.46617444e-01, 3.23463078e-01, -4.22623402e-01, -2.69876744e06],
@@ -80,10 +68,13 @@ def get_hardcoded_ecef_to_aerial() -> np.ndarray:  # TODO remove when new datase
     Returns:
         np.ndarray: 4x4 matrix
     """
-    print(
+    warnings.warn(
         "!!dataset metafile not found!! the hard-coded matrix will be loaded.\n"
-        "This will be deprecated in future releases"
+        "This will be deprecated in future releases",
+        PendingDeprecationWarning,
+        stacklevel=3,
     )
+
     ecef_to_aerial = np.asarray(
         [
             [-0.717416495, -1.14606296, -1.62854453, -572869.824],
@@ -115,17 +106,22 @@ def build_rasterizer(cfg: dict, data_manager: DataManager) -> Rasterizer:
     map_type = raster_cfg["map_type"]
     dataset_meta_key = raster_cfg["dataset_meta_key"]
 
-    raster_size: Tuple[int, int] = cast(Tuple[int, int], tuple(raster_cfg["raster_size"]))
-    pixel_size = np.array(raster_cfg["pixel_size"])
-    ego_center = np.array(raster_cfg["ego_center"])
+    render_context = RenderContext(
+        raster_size_px=np.array(raster_cfg["raster_size"]),
+        pixel_size_m=np.array(raster_cfg["pixel_size"]),
+        center_in_raster_ratio=np.array(raster_cfg["ego_center"]),
+        set_origin_to_bottom=raster_cfg["set_origin_to_bottom"],
+    )
+
     filter_agents_threshold = raster_cfg["filter_agents_threshold"]
     history_num_frames = cfg["model_params"]["history_num_frames"]
+    render_ego_history = cfg["model_params"]["render_ego_history"]
 
     if map_type in ["py_satellite", "satellite_debug"]:
         sat_image = _load_satellite_map(raster_cfg["satellite_map_key"], data_manager)
 
         try:
-            dataset_meta = _load_metadata(dataset_meta_key, data_manager)
+            dataset_meta = load_metadata(data_manager.require(dataset_meta_key))
             world_to_ecef = np.array(dataset_meta["world_to_ecef"], dtype=np.float64)
             ecef_to_aerial = np.array(dataset_meta["ecef_to_aerial"], dtype=np.float64)
 
@@ -136,40 +132,31 @@ def build_rasterizer(cfg: dict, data_manager: DataManager) -> Rasterizer:
         world_to_aerial = np.matmul(ecef_to_aerial, world_to_ecef)
         if map_type == "py_satellite":
             return SatBoxRasterizer(
-                raster_size,
-                pixel_size,
-                ego_center,
-                filter_agents_threshold,
-                history_num_frames,
-                sat_image,
-                world_to_aerial,
+                render_context, filter_agents_threshold, history_num_frames, sat_image, world_to_aerial,
+                render_ego_history=render_ego_history
             )
         else:
-            return SatelliteRasterizer(raster_size, pixel_size, ego_center, sat_image, world_to_aerial)
+            return SatelliteRasterizer(render_context, sat_image, world_to_aerial)
 
     elif map_type in ["py_semantic", "semantic_debug"]:
         semantic_map_filepath = data_manager.require(raster_cfg["semantic_map_key"])
         try:
-            dataset_meta = _load_metadata(dataset_meta_key, data_manager)
+            dataset_meta = load_metadata(data_manager.require(dataset_meta_key))
             world_to_ecef = np.array(dataset_meta["world_to_ecef"], dtype=np.float64)
         except (KeyError, FileNotFoundError):  # TODO remove when new dataset version is available
             world_to_ecef = get_hardcoded_world_to_ecef()
         if map_type == "py_semantic":
             return SemBoxRasterizer(
-                raster_size,
-                pixel_size,
-                ego_center,
-                filter_agents_threshold,
-                history_num_frames,
-                semantic_map_filepath,
-                world_to_ecef,
+                render_context, filter_agents_threshold, history_num_frames, semantic_map_filepath, world_to_ecef,
+                render_ego_history=render_ego_history
             )
         else:
-            return SemanticRasterizer(raster_size, pixel_size, ego_center, semantic_map_filepath, world_to_ecef,)
+            return SemanticRasterizer(render_context, semantic_map_filepath, world_to_ecef)
 
     elif map_type == "box_debug":
-        return BoxRasterizer(raster_size, pixel_size, ego_center, filter_agents_threshold, history_num_frames)
+        return BoxRasterizer(render_context, filter_agents_threshold, history_num_frames,
+                             render_ego_history=render_ego_history)
     elif map_type == "stub_debug":
-        return StubRasterizer(raster_size, pixel_size, ego_center, filter_agents_threshold)
+        return StubRasterizer(render_context)
     else:
         raise NotImplementedError(f"Rasterizer for map type {map_type} is not supported.")

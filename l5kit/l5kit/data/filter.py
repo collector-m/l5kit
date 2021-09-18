@@ -4,6 +4,7 @@ import numpy as np
 
 from .labels import PERCEPTION_LABEL_TO_INDEX, TL_FACE_LABEL_TO_INDEX
 
+
 # Labels that belong to "agents" of some sort.
 PERCEPTION_LABELS_TO_KEEP = [
     "PERCEPTION_LABEL_CAR",
@@ -61,13 +62,14 @@ def filter_agents_by_track_id(agents: np.ndarray, track_id: int) -> np.ndarray:
     """Return all agent object (np.ndarray) of a given track_id.
 
     Arguments:
-        agents (np.ndarray): agents array
+        agents (np.ndarray): agents array.
+            NOTE: do NOT pass a zarr to this function, it can't handle boolean indexing
         track_id (int): agent track id to select
 
     Returns:
         np.ndarray -- Selected agent.
     """
-    return agents[np.nonzero(agents["track_id"] == track_id)[0]]
+    return agents[agents["track_id"] == track_id]
 
 
 def filter_agents_by_frames(frames: np.ndarray, agents: np.ndarray) -> List[np.ndarray]:
