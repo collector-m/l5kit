@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+      <title>l5kit.cle.validators module</title>
+    
+          <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="../_static/theme.css " type="text/css" />
+          <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+
+      
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="../_static/theme-vendors.js"></script> -->
+      <script src="../_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="../genindex.html" />
+  <link rel="search" title="Search" href="../search.html" />
+  <link rel="next" title="l5kit.data package" href="l5kit.data.html" />
+  <link rel="prev" title="l5kit.cle.scene_type_agg module" href="l5kit.cle.scene_type_agg.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="../index.html" class="home-link">
+    
+      <img class="logo" src="../_static/L5logo_small_v2.png" alt="logo"/>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="../index.html#"
+         class="nav-link ">
+         None
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../intro_index.html#introduction-and-overview"
+         class="nav-link ">
+         introduction and overview
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../gettingstarted.html#getting-started"
+         class="nav-link ">
+         getting started
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../tutorials.html#tutorials"
+         class="nav-link ">
+         tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../competitions.html#competitions"
+         class="nav-link ">
+         competitions
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../contribute_index.html#contribute"
+         class="nav-link ">
+         contribute
+      </a>
+    </div>
+  
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/lyft/l5kit"
+        class="nav-link external">
+          Github <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="../index.html#"
+         class="nav-link ">
+         None
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../intro_index.html#introduction-and-overview"
+         class="nav-link ">
+         introduction and overview
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../gettingstarted.html#getting-started"
+         class="nav-link ">
+         getting started
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../tutorials.html#tutorials"
+         class="nav-link ">
+         tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../competitions.html#competitions"
+         class="nav-link ">
+         competitions
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../contribute_index.html#contribute"
+         class="nav-link ">
+         contribute
+      </a>
+    </div>
+  
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/lyft/l5kit"
+        class="nav-link external">
+          Github <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="../search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#">None</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../changelog.html" class="reference internal ">Changelog</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../intro_index.html#introduction-and-overview">introduction and overview</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../introduction.html" class="reference internal ">Introduction</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../overview.html" class="reference internal ">Overview</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../gettingstarted.html#getting-started">getting started</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../installation.html" class="reference internal ">Installation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../data_format.html" class="reference internal ">Dataset Formats in L5Kit</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../coords_systems.html" class="reference internal ">Coordinate Systems in L5Kit</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../tutorials.html#tutorials">tutorials</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../prediction.html" class="reference internal ">Prediction</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../planning.html" class="reference internal ">Planning</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../simulation.html" class="reference internal ">Simulation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../reinforcement.html" class="reference internal ">Reinforcement Learning</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../competitions.html#competitions">competitions</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../prediction_competition.html" class="reference internal ">Prediction Competition</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../contribute_index.html#contribute">contribute</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../how_to_contribute.html" class="reference internal ">How to contribute</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../api_reference.html" class="reference internal ">API Reference</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../license.html" class="reference internal ">License</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../credits.html" class="reference internal ">Credits</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../contribute_index.html">Contribute</a> &raquo;</li>
+    
+      <li><a href="../api_reference.html">API Reference</a> &raquo;</li>
+    
+      <li><a href="l5kit.cle.html">l5kit.cle package</a> &raquo;</li>
+    
+    <li>l5kit.cle.validators module</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="l5kit.cle.scene_type_agg.html"
+       title="previous chapter">← l5kit.cle.scene_type_agg module</a>
+  </li>
+  <li class="next">
+    <a href="l5kit.data.html"
+       title="next chapter">l5kit.data package →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <section id="module-l5kit.cle.validators">
+<span id="l5kit-cle-validators-module"></span><h1>l5kit.cle.validators module<a class="headerlink" href="#module-l5kit.cle.validators" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.cle.validators.DurationMode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.cle.validators.</span></span><span class="sig-name descname"><span class="pre">DurationMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.cle.validators.DurationMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></p>
+<p>For more information about duration mode, see RangeValidator docs.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.cle.validators.DurationMode.CONTINUOUS">
+<span class="sig-name descname"><span class="pre">CONTINUOUS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#l5kit.cle.validators.DurationMode.CONTINUOUS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.cle.validators.DurationMode.TOTAL">
+<span class="sig-name descname"><span class="pre">TOTAL</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#l5kit.cle.validators.DurationMode.TOTAL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.cle.validators.FailedFrame">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.cle.validators.</span></span><span class="sig-name descname"><span class="pre">FailedFrame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scene_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.cle.validators.FailedFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>A named-tuple composed of the scene if and the
+frame index on that scene that caused the validator to fail.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.cle.validators.FailedFrame.frame_index">
+<span class="sig-name descname"><span class="pre">frame_index</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#l5kit.cle.validators.FailedFrame.frame_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.cle.validators.FailedFrame.scene_id">
+<span class="sig-name descname"><span class="pre">scene_id</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#l5kit.cle.validators.FailedFrame.scene_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.cle.validators.RangeValidator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.cle.validators.</span></span><span class="sig-name descname"><span class="pre">RangeValidator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">validator_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="l5kit.cle.metrics.html#l5kit.cle.metrics.SupportsMetricCompute" title="l5kit.cle.metrics.SupportsMetricCompute"><span class="pre">l5kit.cle.metrics.SupportsMetricCompute</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">violation_duration_s</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration_mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#l5kit.cle.validators.DurationMode" title="l5kit.cle.validators.DurationMode"><span class="pre">l5kit.cle.validators.DurationMode</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">DurationMode.TOTAL</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.cle.validators.RangeValidator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#l5kit.cle.validators.SupportsMetricValidate" title="l5kit.cle.validators.SupportsMetricValidate"><code class="xref py py-class docutils literal notranslate"><span class="pre">l5kit.cle.validators.SupportsMetricValidate</span></code></a></p>
+<p>Validates a metric based on specified range. The range validator will
+check: min_value &lt; metric_value &lt; max_value. It will also check if the
+metric violated a maximum duration (see duration_mode parameter notes).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>validator_name</strong> – name of the validator</p></li>
+<li><p><strong>metric</strong> – metric class used to validate</p></li>
+<li><p><strong>min_value</strong> – minimum value allowed (inclusive)</p></li>
+<li><p><strong>max_value</strong> – maximum value allowed (inclusive)</p></li>
+<li><p><strong>violation_duration_s</strong> – maximum allowed duration in seconds
+where the metric can be violated</p></li>
+<li><p><strong>duration_mode</strong> – the duration mode can be “total” or “continuous”. In
+“total” mode, all violations are summed per scene, and
+if they exceed the violation_duration_s parameter, then
+it will not pass the validation. In “continuous” mode,
+the violation_duration_s parameter must be exceded
+on a continuous violation of the metric in time (without
+a gap of non-violation). This parameter is ignored
+if violation_duration_s is zero.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.validators.RangeValidator.cumsum_with_reset">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">cumsum_with_reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp_diff</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="headerlink" href="#l5kit.cle.validators.RangeValidator.cumsum_with_reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cumulative sum (cumsum) that takes into consideration a valid mask.
+If the valid mask is False on a timestamp, it will reset the accumulator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp_diff</strong> – timestamps differentiated (1D array)</p></li>
+<li><p><strong>validation_mask</strong> – a boolean mask with valid/invalid timestamps (1D array)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>cumulative sum (1D array)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.cle.validators.RangeValidator.requires_metric">
+<span class="sig-name descname"><span class="pre">requires_metric</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#l5kit.cle.validators.RangeValidator.requires_metric" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.validators.RangeValidator.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric_results</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulation_output</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="l5kit.simulation.unroll.html#l5kit.simulation.unroll.SimulationOutputCLE" title="l5kit.simulation.unroll.SimulationOutputCLE"><span class="pre">l5kit.simulation.unroll.SimulationOutputCLE</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#l5kit.cle.validators.ValidatorOutput" title="l5kit.cle.validators.ValidatorOutput"><span class="pre">l5kit.cle.validators.ValidatorOutput</span></a></span></span><a class="headerlink" href="#l5kit.cle.validators.RangeValidator.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply the validator on the results of the metric computation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metric_results</strong> – all metric results</p></li>
+<li><p><strong>simulation_output</strong> – output from the closed-loop simulator</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if validator passed, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.cle.validators.RangeValidator.validator_name">
+<span class="sig-name descname"><span class="pre">validator_name</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#l5kit.cle.validators.RangeValidator.validator_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.cle.validators.SupportsMetricValidate">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.cle.validators.</span></span><span class="sig-name descname"><span class="pre">SupportsMetricValidate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.cle.validators.SupportsMetricValidate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Protocol</span></code></p>
+<p>Protocol supporting the validation for metrics. The evaluation plan
+has two main components: metrics and validators. Metrics are completely
+independent, but validators not, as they depend on metrics, therefore
+the validator needs to carry a list of metrics it requires to compute,
+otherwise, the evaluation plan is not consistent, and this is checked
+by the evaluation plan.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.cle.validators.SupportsMetricValidate.requires_metric">
+<span class="sig-name descname"><span class="pre">requires_metric</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#l5kit.cle.validators.SupportsMetricValidate.requires_metric" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.validators.SupportsMetricValidate.validate">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric_results</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulation_output</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="l5kit.simulation.unroll.html#l5kit.simulation.unroll.SimulationOutputCLE" title="l5kit.simulation.unroll.SimulationOutputCLE"><span class="pre">l5kit.simulation.unroll.SimulationOutputCLE</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#l5kit.cle.validators.ValidatorOutput" title="l5kit.cle.validators.ValidatorOutput"><span class="pre">l5kit.cle.validators.ValidatorOutput</span></a></span></span><a class="headerlink" href="#l5kit.cle.validators.SupportsMetricValidate.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply the validator on the metric results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metric_results</strong> – results from all computed metrics</p></li>
+<li><p><strong>simulation_output</strong> – output from the closed-loop simulator</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if validator passed, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.cle.validators.SupportsMetricValidate.validator_name">
+<span class="sig-name descname"><span class="pre">validator_name</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#l5kit.cle.validators.SupportsMetricValidate.validator_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.cle.validators.SupportsValidationAggregation">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.cle.validators.</span></span><span class="sig-name descname"><span class="pre">SupportsValidationAggregation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.cle.validators.SupportsValidationAggregation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Protocol</span></code></p>
+<p>Protocol supporting the validation aggregation. This aggregator
+is responsible for aggregating results from the the validators and
+also doing a reduction step across multiple distributed nodes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.validators.SupportsValidationAggregation.aggregate">
+<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scene_validation_results</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="#l5kit.cle.validators.ValidatorOutput" title="l5kit.cle.validators.ValidatorOutput"><span class="pre">l5kit.cle.validators.ValidatorOutput</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#l5kit.cle.validators.SupportsValidationAggregation.aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will aggregate scenes locally and then will
+do the reduction step to aggregate data across distributed
+nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scene_validation_results</strong> – results from validator
+outputs per scene</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>any result (it can be a composite object with scenes and frames
+or just a float value) indexed by the validator name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.cle.validators.ValidationCountingAggregator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.cle.validators.</span></span><span class="sig-name descname"><span class="pre">ValidationCountingAggregator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failed_frames</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.cle.validators.ValidationCountingAggregator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#l5kit.cle.validators.SupportsValidationAggregation" title="l5kit.cle.validators.SupportsValidationAggregation"><code class="xref py py-class docutils literal notranslate"><span class="pre">l5kit.cle.validators.SupportsValidationAggregation</span></code></a></p>
+<p>This aggregator will count (sum) the amount of invalid scenes or
+optionally the amount of failed frames on each scene.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>failed_frames</strong> – if True, it will count the number of frames
+failed instead of scenes failed.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.validators.ValidationCountingAggregator.aggregate">
+<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scene_validation_results</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="#l5kit.cle.validators.ValidatorOutput" title="l5kit.cle.validators.ValidatorOutput"><span class="pre">l5kit.cle.validators.ValidatorOutput</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#l5kit.cle.validators.ValidationCountingAggregator.aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will aggregate scenes locally.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scene_validation_results</strong> – results from validator
+outputs per scene</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>any result (it can be a composite object with scenes and frames
+or just a float value) indexed by the validator name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.validators.ValidationCountingAggregator.aggregate_scenes">
+<span class="sig-name descname"><span class="pre">aggregate_scenes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scene_validation_results</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="#l5kit.cle.validators.ValidatorOutput" title="l5kit.cle.validators.ValidatorOutput"><span class="pre">l5kit.cle.validators.ValidatorOutput</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#l5kit.cle.validators.ValidationCountingAggregator.aggregate_scenes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate the scenes locally on each node. This method will just
+sum the number of invalid scenes across all scenes in the node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scene_validation_results</strong> – results from validator
+outputs per scene</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a dictionary with the validation metric name as keys
+and the sum of invalid scenes</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.cle.validators.ValidationFailedFramesAggregator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.cle.validators.</span></span><span class="sig-name descname"><span class="pre">ValidationFailedFramesAggregator</span></span><a class="headerlink" href="#l5kit.cle.validators.ValidationFailedFramesAggregator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This aggregator will aggregate all failed frames (and scenes).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.validators.ValidationFailedFramesAggregator.aggregate">
+<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scene_validation_results</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="#l5kit.cle.validators.ValidatorOutput" title="l5kit.cle.validators.ValidatorOutput"><span class="pre">l5kit.cle.validators.ValidatorOutput</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#l5kit.cle.validators.ValidationFailedFramesAggregator.aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will aggregate scenes locally and then will
+do the reduction step to aggregate data across distributed
+nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scene_validation_results</strong> – results from validator
+outputs per scene</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>any result (it can be a composite object with scenes and frames
+or just a float value) indexed by the validator name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.validators.ValidationFailedFramesAggregator.aggregate_scenes">
+<span class="sig-name descname"><span class="pre">aggregate_scenes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scene_validation_results</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="#l5kit.cle.validators.ValidatorOutput" title="l5kit.cle.validators.ValidatorOutput"><span class="pre">l5kit.cle.validators.ValidatorOutput</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#l5kit.cle.validators.ValidationFailedFramesAggregator.aggregate_scenes" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will aggregate the failed scene/frame tuples locally
+at each node and then build a 1D torch tensor with the unpacked tuples such
+as [scene, frame, scene frame, (…)], to be able to gather them later on
+the reduction across different nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scene_validation_results</strong> – results from validator
+outputs per scene</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a dictionary, indexed by the validator name, with
+FailedFrame list containing the scene/frames failed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.cle.validators.ValidatorOutput">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.cle.validators.</span></span><span class="sig-name descname"><span class="pre">ValidatorOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_valid_scene</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failed_frames</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.cle.validators.ValidatorOutput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Output from validators. Validators should return a boolean
+telling if the scene is valid or not and a list of failed
+frames.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.cle.validators.ValidatorOutput.failed_frames">
+<span class="sig-name descname"><span class="pre">failed_frames</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#l5kit.cle.validators.ValidatorOutput.failed_frames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.cle.validators.ValidatorOutput.is_valid_scene">
+<span class="sig-name descname"><span class="pre">is_valid_scene</span></span><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#l5kit.cle.validators.ValidatorOutput.is_valid_scene" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="l5kit.cle.scene_type_agg.html"
+       title="previous chapter">← l5kit.cle.scene_type_agg module</a>
+  </li>
+  <li class="next">
+    <a href="l5kit.data.html"
+       title="next chapter">l5kit.data package →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2021, Level 5. Car Vectors by Vecteezy (https://www.vecteezy.com/free-vector/car).
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.1.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
+    
+    
+  </body>
+</html>

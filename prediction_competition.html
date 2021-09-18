@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+      <title>Prediction Competition</title>
+    
+          <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="_static/theme.css " type="text/css" />
+          <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+
+      
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="_static/theme-vendors.js"></script> -->
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="Contribute" href="contribute_index.html" />
+  <link rel="prev" title="Competitions" href="competitions.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    
+      <img class="logo" src="_static/L5logo_small_v2.png" alt="logo"/>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="index.html#"
+         class="nav-link ">
+         None
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="intro_index.html#introduction-and-overview"
+         class="nav-link ">
+         introduction and overview
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="gettingstarted.html#getting-started"
+         class="nav-link ">
+         getting started
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="tutorials.html#tutorials"
+         class="nav-link ">
+         tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="competitions.html#competitions"
+         class="nav-link  router-link-active">
+         competitions
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="contribute_index.html#contribute"
+         class="nav-link ">
+         contribute
+      </a>
+    </div>
+  
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/lyft/l5kit"
+        class="nav-link external">
+          Github <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="index.html#"
+         class="nav-link ">
+         None
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="intro_index.html#introduction-and-overview"
+         class="nav-link ">
+         introduction and overview
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="gettingstarted.html#getting-started"
+         class="nav-link ">
+         getting started
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="tutorials.html#tutorials"
+         class="nav-link ">
+         tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="competitions.html#competitions"
+         class="nav-link  router-link-active">
+         competitions
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="contribute_index.html#contribute"
+         class="nav-link ">
+         contribute
+      </a>
+    </div>
+  
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/lyft/l5kit"
+        class="nav-link external">
+          Github <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="index.html#">None</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="changelog.html" class="reference internal ">Changelog</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="intro_index.html#introduction-and-overview">introduction and overview</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="introduction.html" class="reference internal ">Introduction</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="overview.html" class="reference internal ">Overview</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="gettingstarted.html#getting-started">getting started</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="installation.html" class="reference internal ">Installation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="data_format.html" class="reference internal ">Dataset Formats in L5Kit</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="coords_systems.html" class="reference internal ">Coordinate Systems in L5Kit</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="tutorials.html#tutorials">tutorials</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="prediction.html" class="reference internal ">Prediction</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="planning.html" class="reference internal ">Planning</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="simulation.html" class="reference internal ">Simulation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="reinforcement.html" class="reference internal ">Reinforcement Learning</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="competitions.html#competitions">competitions</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 current">
+            
+              <a href="#" class="reference internal current">Prediction Competition</a>
+            
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#scoring" class="reference internal">Scoring</a></li>
+                
+                  <li class="toctree-l2"><a href="#coordinates-system-for-the-competition" class="reference internal">Coordinates System for the competition</a></li>
+                
+                  <li class="toctree-l2"><a href="#additional-metrics" class="reference internal">Additional Metrics</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="contribute_index.html#contribute">contribute</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="how_to_contribute.html" class="reference internal ">How to contribute</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="api_reference.html" class="reference internal ">API Reference</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="license.html" class="reference internal ">License</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="credits.html" class="reference internal ">Credits</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="competitions.html">Competitions</a> &raquo;</li>
+    
+    <li>Prediction Competition</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="competitions.html"
+       title="previous chapter">← Competitions</a>
+  </li>
+  <li class="next">
+    <a href="contribute_index.html"
+       title="next chapter">Contribute →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <section id="prediction-competition">
+<span id="pred-competition"></span><h1>Prediction Competition<a class="headerlink" href="#prediction-competition" title="Permalink to this headline">¶</a></h1>
+<p>Starting 24.08.2020 we are hosting a <a class="reference external" href="https://www.kaggle.com/c/lyft-motion-prediction-autonomous-vehicles/overview">Kaggle competition</a> about predicting future movements of other traffic participants.
+This page serves as introduction point for it and gives additional information.</p>
+<section id="scoring">
+<h2>Scoring<a class="headerlink" href="#scoring" title="Permalink to this headline">¶</a></h2>
+<p>When taking part in the competition, you will be asked to submit predictions for a private test set (no ground truth is available),
+and your solutions will be scored by Kaggle. Overall 30.000 USD as prizes are available!
+As traffic scenes can contain a large amount of ambiguity and uncertainty, we encourage the submission of multi-modal predictions.
+For scoring, we calculate the <em>negative log-likelihood</em> of the ground truth data given these multi-modal predictions.
+Let us take a closer look at this.
+Assume, ground truth positions of a sample trajectory are</p>
+<img alt="Equation" src="https://latex.codecogs.com/gif.latex?%5Cbg_white%20%5Clarge%20x_1%2C%20%5Cldots%2C%20x_T%2C%20y_1%2C%20%5Cldots%2C%20y_T" />
+<p>and we predict K hypotheses, represented by means</p>
+<img alt="Equation" src="https://latex.codecogs.com/gif.latex?%5Cbg_white%20%5Clarge%20%5Cbar%7Bx%7D_1%5Ek%2C%20%5Cldots%2C%20%5Cbar%7Bx%7D_T%5Ek%2C%20%5Cbar%7By%7D_1%5Ek%2C%20%5Cldots%2C%20%5Cbar%7By%7D_T%5Ek" />
+<p>In addition, we predict confidences c of these K hypotheses.
+We assume the ground truth positions to be modelled by a mixture of multi-dimensional independent Normal distributions over time,
+yielding the likelihood</p>
+<img alt="Equation" src="https://latex.codecogs.com/gif.latex?%5Cbg_white%20%5Clarge%20p%28x_%7B1%2C%20%5Cldots%2C%20T%7D%2C%20y_%7B1%2C%20%5Cldots%2C%20T%7D%7Cc%5E%7B1%2C%20%5Cldots%2C%20K%7D%2C%20%5Cbar%7Bx%7D_%7B1%2C%20%5Cldots%2C%20T%7D%5E%7B1%2C%20%5Cldots%2C%20K%7D%2C%20%5Cbar%7By%7D_%7B1%2C%20%5Cldots%2C%20T%7D%5E%7B1%2C%20%5Cldots%2C%20K%7D%29" />
+<img alt="Equation" src="https://latex.codecogs.com/gif.latex?%5Cbg_white%20%5Clarge%20%3D%20%5Csum_k%20c%5Ek%20%5Cmathcal%7BN%7D%28x_%7B1%2C%20%5Cldots%2C%20T%7D%7C%5Cbar%7Bx%7D_%7B1%2C%20%5Cldots%2C%20T%7D%5E%7Bk%7D%2C%20%5CSigma%3D1%29%20%5Cmathcal%7BN%7D%28y_%7B1%2C%20%5Cldots%2C%20T%7D%7C%5Cbar%7By%7D_%7B1%2C%20%5Cldots%2C%20T%7D%5E%7Bk%7D%2C%20%5CSigma%3D1%29" />
+<img alt="Equation" src="https://latex.codecogs.com/gif.latex?%5Cbg_white%20%5Clarge%20%3D%20%5Csum_k%20c%5Ek%20%5Cprod_t%20%5Cmathcal%7BN%7D%28x_t%7C%5Cbar%7Bx%7D_t%5Ek%2C%20%5Csigma%3D1%29%20%5Cmathcal%7BN%7D%28y_t%7C%5Cbar%7By%7D_t%5Ek%2C%20%5Csigma%3D1%29" />
+<p>yielding the loss</p>
+<img alt="Equation" src="https://latex.codecogs.com/gif.latex?%5Cbg_white%20%5Clarge%20L%20%3D%20-%20%5Clog%20p%28x_%7B1%2C%20%5Cldots%2C%20T%7D%2C%20y_%7B1%2C%20%5Cldots%2C%20T%7D%7Cc%5E%7B1%2C%20%5Cldots%2C%20K%7D%2C%20%5Cbar%7Bx%7D_%7B1%2C%20%5Cldots%2C%20T%7D%5E%7B1%2C%20%5Cldots%2C%20K%7D%2C%20%5Cbar%7By%7D_%7B1%2C%20%5Cldots%2C%20T%7D%5E%7B1%2C%20%5Cldots%2C%20K%7D%29" />
+<img alt="Equation" src="https://latex.codecogs.com/gif.latex?%5Cbg_white%20%5Clarge%20%3D%20-%20%5Clog%20%5Csum_k%20e%5E%7B%5Clog%28c%5Ek%29%20&amp;plus;%20%5Csum_t%20%5Clog%20%5Cmathcal%7BN%7D%28x_t%7C%5Cbar%7Bx%7D_t%5Ek%2C%20%5Csigma%3D1%29%20%5Cmathcal%7BN%7D%28y_t%7C%5Cbar%7By%7D_t%5Ek%2C%20%5Csigma%3D1%29%7D" />
+<img alt="Equation" src="https://latex.codecogs.com/gif.latex?%5Cbg_white%20%5Clarge%20%3D%20-%20%5Clog%20%5Csum_k%20e%5E%7B%5Clog%28c%5Ek%29%20-%5Cfrac%7B1%7D%7B2%7D%20%5Csum_t%20%28%5Cbar%7Bx%7D_t%5Ek%20-%20x_t%29%5E2%20&amp;plus;%20%28%5Cbar%7By%7D_t%5Ek%20-%20y_t%29%5E2%7D" />
+<p>You can find our implementation <a class="reference external" href="https://github.com/lyft/l5kit/blob/20ab033c01610d711c3d36e1963ecec86e8b85b6/l5kit/l5kit/evaluation/metrics.py#L4">here</a>, which uses <em>error</em> as placeholder for the exponent</p>
+<img alt="Equation" src="https://latex.codecogs.com/gif.latex?%5Cbg_white%20%5Clarge%20L%20%3D%20-%5Clog%20%5Csum_k%20e%5E%7B%5Ctexttt%7Berror%7D%7D)" />
+<p>and for numeral stability further applies the <a class="reference external" href="https://en.wikipedia.org/wiki/LogSumExp#log-sum-exp_trick_for_log-domain_calculations">log-sum-exp trick</a>:
+Assume, we need to calculate the logarithm of a sum of exponentials:</p>
+<img alt="Equation" src="https://latex.codecogs.com/gif.latex?%5Cbg_white%20%5Clarge%20LSE%28x_1%2C%20%5Cldots%2C%20x_n%29%20%3D%20%5Clog%28e%5E%7Bx_1%7D%20&amp;plus;%20%5Cldots%20&amp;plus;%20e%5E%7Bx_n%7D%29" />
+<p>Then, we rewrite this by substracting the maximum value x<sup>*</sup> from each exponent, resulting in much increased numerical stability:</p>
+<img alt="Equation" src="https://latex.codecogs.com/gif.latex?%5Cbg_white%20%5Clarge%20LSE%28x_1%2C%20%5Cldots%2C%20x_n%29%20%3D%20x%5E*%20&amp;plus;%20%5Clog%28e%5E%7Bx_1%20-%20x%5E%7B*%7D%7D%20&amp;plus;%20%5Cldots%20&amp;plus;%20e%5E%7Bx_n%20-%20x%5E%7B*%7D%7D%29" />
+</section>
+<section id="coordinates-system-for-the-competition">
+<h2>Coordinates System for the competition<a class="headerlink" href="#coordinates-system-for-the-competition" title="Permalink to this headline">¶</a></h2>
+<p>Please refer to <a class="reference internal" href="coords_systems.html#coordinate"><span class="std std-ref">this doc</span></a> for a full description of the different coordinate systems used in L5Kit.</p>
+<p>The ground truth coordinates for the competition are stored as positional displacements in the <a class="reference internal" href="coords_systems.html#world-coordinate"><span class="std std-ref">world coordinate system</span></a>.
+However, you will likely predict relative displacements for the agent of interest either in the <a class="reference internal" href="coords_systems.html#agent-coordinate"><span class="std std-ref">agent coordinate system</span></a>
+or in the <a class="reference internal" href="coords_systems.html#image-coordinate"><span class="std std-ref">image coordinate system</span></a>.
+Before using <a class="reference external" href="https://github.com/lyft/l5kit/blob/master/l5kit/l5kit/evaluation/csv_utils.py">our utils</a> to write a CSV file for you predictions convert them
+into the world coordinate system using the appropriate transformation matrix available as part of <a class="reference internal" href="data_format.html#data-abstraction"><span class="std std-ref">the input data</span></a> and subtract the centroid.</p>
+<p>Yaw is not required/used for this competition.</p>
+</section>
+<section id="additional-metrics">
+<h2>Additional Metrics<a class="headerlink" href="#additional-metrics" title="Permalink to this headline">¶</a></h2>
+<p>Scoring multi-modal prediction models is a highly complex task, and while we chose the metric described above due to its elegance and support for multi-modality,
+we encourage participants to also employ other metrics for assessing their models.
+Examples of such other metrics, commonly used in literature, are <em>Average Displacement Error</em> (ADE) and <em>Final Displacement Error</em> (FDE) (see
+<a class="reference external" href="https://arxiv.org/pdf/2006.14480.pdf">our dataset paper</a> or <a class="reference external" href="https://arxiv.org/pdf/1806.01482.pdf">SophieGAN</a>):
+ADE is the average displacement error (L2 distance between prediction and ground truth averaged over all timesteps), while FDE
+reports the final displacement error (L2 distance between prediction and ground truth, evaluated only at the last timestep).
+As we consider multiple predictions, we offer <a class="reference external" href="https://github.com/lyft/l5kit/blob/master/l5kit/l5kit/evaluation/metrics.py">implementations for both these metrics</a> either averaging over all hypotheses
+or using the best hypothesis (oracle variant) - ignoring generated confidence scores in both cases.</p>
+</section>
+</section>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="competitions.html"
+       title="previous chapter">← Competitions</a>
+  </li>
+  <li class="next">
+    <a href="contribute_index.html"
+       title="next chapter">Contribute →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2021, Level 5. Car Vectors by Vecteezy (https://www.vecteezy.com/free-vector/car).
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.1.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
+    
+    
+  </body>
+</html>

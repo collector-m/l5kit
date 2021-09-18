@@ -12,13 +12,17 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
+   l5kit.cle
    l5kit.configs
    l5kit.data
    l5kit.dataset
+   l5kit.environment
    l5kit.evaluation
    l5kit.geometry
    l5kit.kinematic
+   l5kit.planning
    l5kit.random
    l5kit.rasterization
    l5kit.sampling
+   l5kit.simulation
    l5kit.visualization

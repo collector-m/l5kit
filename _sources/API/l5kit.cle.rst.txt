@@ -1,0 +1,20 @@
+l5kit.cle package
+=================
+
+.. automodule:: l5kit.cle
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   l5kit.cle.closed_loop_evaluator
+   l5kit.cle.composite_metrics
+   l5kit.cle.metric_set
+   l5kit.cle.metrics
+   l5kit.cle.scene_type_agg
+   l5kit.cle.validators

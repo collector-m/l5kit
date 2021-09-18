@@ -1,194 +1,410 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>l5kit.dataset package &mdash; L5Kit 1.0.5 documentation</title>
-  
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
+      <title>l5kit.dataset package</title>
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+          <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="../_static/theme.css " type="text/css" />
+          <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="l5kit.dataset.agent module" href="l5kit.dataset.agent.html" />
-    <link rel="prev" title="l5kit.data.zarr_utils module" href="l5kit.data.zarr_utils.html" /> 
-</head>
-
-<body class="wy-body-for-nav">
-
-   
-  <div class="wy-grid-for-nav">
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-          
-
-          
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> L5Kit
-          
-
-          
-          </a>
-
-          
-            
-            
-          
-
-          
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../README.html">ML Prediction, Planning and Simulation for Self-Driving</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../README.html#examples">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../README.html#news">News</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../README.html#overview">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../README.html#installation">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../README.html#license">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../README.html#credits">Credits</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../README.html#contact">Contact</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../api_reference.html">API Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="l5kit.data.html">l5kit.data package</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">l5kit.dataset package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="l5kit.dataset.agent.html">l5kit.dataset.agent module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="l5kit.dataset.dataloader_builder.html">l5kit.dataset.dataloader_builder module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="l5kit.dataset.ego.html">l5kit.dataset.ego module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="l5kit.dataset.select_agents.html">l5kit.dataset.select_agents module</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="l5kit.evaluation.html">l5kit.evaluation package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="l5kit.geometry.html">l5kit.geometry package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="l5kit.kinematic.html">l5kit.kinematic package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="l5kit.random.html">l5kit.random package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="l5kit.sampling.html">l5kit.sampling package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="l5kit.visualization.html">l5kit.visualization package</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../data_format.html">Dataset Formats</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../how_to_contribute.html">How to contribute</a></li>
-</ul>
-
-            
-          
-        </div>
-        
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">L5Kit</a>
-        
-      </nav>
-
-
-      <div class="wy-nav-content">
-        
-        <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
-  <ul class="wy-breadcrumbs">
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="../_static/theme-vendors.js"></script> -->
+      <script src="../_static/theme.js" defer></script>
     
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../api_reference.html">API Reference</a> &raquo;</li>
-        
-      <li>l5kit.dataset package</li>
+  <link rel="index" title="Index" href="../genindex.html" />
+  <link rel="search" title="Search" href="../search.html" />
+  <link rel="next" title="l5kit.dataset.agent module" href="l5kit.dataset.agent.html" />
+  <link rel="prev" title="l5kit.data.zarr_utils module" href="l5kit.data.zarr_utils.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="../index.html" class="home-link">
     
+      <img class="logo" src="../_static/L5logo_small_v2.png" alt="logo"/>
     
-      <li class="wy-breadcrumbs-aside">
-        
-            
-            <a href="../_sources/API/l5kit.dataset.rst.txt" rel="nofollow"> View page source</a>
-          
-        
-      </li>
-    
-  </ul>
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
 
   
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
+    <div class="nav-item">
+      <a href="../index.html#"
+         class="nav-link ">
+         None
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../intro_index.html#introduction-and-overview"
+         class="nav-link ">
+         introduction and overview
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../gettingstarted.html#getting-started"
+         class="nav-link ">
+         getting started
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../tutorials.html#tutorials"
+         class="nav-link ">
+         tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../competitions.html#competitions"
+         class="nav-link ">
+         competitions
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../contribute_index.html#contribute"
+         class="nav-link ">
+         contribute
+      </a>
+    </div>
+  
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/lyft/l5kit"
+        class="nav-link external">
+          Github <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
             
-  <div class="section" id="module-l5kit.dataset">
+
+  
+    <div class="nav-item">
+      <a href="../index.html#"
+         class="nav-link ">
+         None
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../intro_index.html#introduction-and-overview"
+         class="nav-link ">
+         introduction and overview
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../gettingstarted.html#getting-started"
+         class="nav-link ">
+         getting started
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../tutorials.html#tutorials"
+         class="nav-link ">
+         tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../competitions.html#competitions"
+         class="nav-link ">
+         competitions
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../contribute_index.html#contribute"
+         class="nav-link ">
+         contribute
+      </a>
+    </div>
+  
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/lyft/l5kit"
+        class="nav-link external">
+          Github <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="../search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#">None</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../changelog.html" class="reference internal ">Changelog</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../intro_index.html#introduction-and-overview">introduction and overview</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../introduction.html" class="reference internal ">Introduction</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../overview.html" class="reference internal ">Overview</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../gettingstarted.html#getting-started">getting started</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../installation.html" class="reference internal ">Installation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../data_format.html" class="reference internal ">Dataset Formats in L5Kit</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../coords_systems.html" class="reference internal ">Coordinate Systems in L5Kit</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../tutorials.html#tutorials">tutorials</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../prediction.html" class="reference internal ">Prediction</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../planning.html" class="reference internal ">Planning</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../simulation.html" class="reference internal ">Simulation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../reinforcement.html" class="reference internal ">Reinforcement Learning</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../competitions.html#competitions">competitions</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../prediction_competition.html" class="reference internal ">Prediction Competition</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../contribute_index.html#contribute">contribute</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../how_to_contribute.html" class="reference internal ">How to contribute</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../api_reference.html" class="reference internal ">API Reference</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../license.html" class="reference internal ">License</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../credits.html" class="reference internal ">Credits</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../contribute_index.html">Contribute</a> &raquo;</li>
+    
+      <li><a href="../api_reference.html">API Reference</a> &raquo;</li>
+    
+    <li>l5kit.dataset package</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="l5kit.data.zarr_utils.html"
+       title="previous chapter">← l5kit.data.zarr_utils module</a>
+  </li>
+  <li class="next">
+    <a href="l5kit.dataset.agent.html"
+       title="next chapter">l5kit.dataset.agent module →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <section id="module-l5kit.dataset">
 <span id="l5kit-dataset-package"></span><h1>l5kit.dataset package<a class="headerlink" href="#module-l5kit.dataset" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="l5kit.dataset.AgentDataset">
-<em class="property">class </em><code class="sig-prename descclassname">l5kit.dataset.</code><code class="sig-name descname">AgentDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cfg</span><span class="p">:</span> <span class="n">dict</span></em>, <em class="sig-param"><span class="n">zarr_dataset</span><span class="p">:</span> <span class="n"><a class="reference internal" href="l5kit.data.zarr_dataset.html#l5kit.data.zarr_dataset.ChunkedDataset" title="l5kit.data.zarr_dataset.ChunkedDataset">l5kit.data.zarr_dataset.ChunkedDataset</a></span></em>, <em class="sig-param"><span class="n">rasterizer</span><span class="p">:</span> <span class="n"><a class="reference internal" href="l5kit.rasterization.rasterizer.html#l5kit.rasterization.rasterizer.Rasterizer" title="l5kit.rasterization.rasterizer.Rasterizer">l5kit.rasterization.rasterizer.Rasterizer</a></span></em>, <em class="sig-param"><span class="n">perturbation</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference internal" href="l5kit.kinematic.perturbation.html#l5kit.kinematic.perturbation.Perturbation" title="l5kit.kinematic.perturbation.Perturbation">l5kit.kinematic.perturbation.Perturbation</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">agents_mask</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>numpy.ndarray<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">min_frame_history</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em>, <em class="sig-param"><span class="n">min_frame_future</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.dataset.AgentDataset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="l5kit.dataset.ego.html#l5kit.dataset.ego.EgoDataset" title="l5kit.dataset.ego.EgoDataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">l5kit.dataset.ego.EgoDataset</span></code></a></p>
+<dt class="sig sig-object py" id="l5kit.dataset.AgentDataset">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.dataset.</span></span><span class="sig-name descname"><span class="pre">AgentDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zarr_dataset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="l5kit.data.zarr_dataset.html#l5kit.data.zarr_dataset.ChunkedDataset" title="l5kit.data.zarr_dataset.ChunkedDataset"><span class="pre">l5kit.data.zarr_dataset.ChunkedDataset</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rasterizer</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="l5kit.rasterization.rasterizer.html#l5kit.rasterization.rasterizer.Rasterizer" title="l5kit.rasterization.rasterizer.Rasterizer"><span class="pre">l5kit.rasterization.rasterizer.Rasterizer</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">perturbation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="l5kit.kinematic.perturbation.html#l5kit.kinematic.perturbation.Perturbation" title="l5kit.kinematic.perturbation.Perturbation"><span class="pre">l5kit.kinematic.perturbation.Perturbation</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agents_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_frame_history</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_frame_future</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.dataset.AgentDataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.dataset.T_co</span></code>]</p>
 <dl class="py method">
-<dt id="l5kit.dataset.AgentDataset.get_frame_indices">
-<code class="sig-name descname">get_frame_indices</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">frame_idx</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#l5kit.dataset.AgentDataset.get_frame_indices" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="l5kit.dataset.AgentDataset.get_frame_indices">
+<span class="sig-name descname"><span class="pre">get_frame_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame_idx</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#l5kit.dataset.AgentDataset.get_frame_indices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get indices for the given frame. Here __getitem__ iterate over valid agents indices.
 This means <code class="docutils literal notranslate"><span class="pre">__getitem__(0)</span></code> matches the first valid agent in the dataset.
 :param frame_idx: index of the scene
@@ -204,15 +420,15 @@ This means <code class="docutils literal notranslate"><span class="pre">__getite
 </dd></dl>
 
 <dl class="py method">
-<dt id="l5kit.dataset.AgentDataset.get_scene_dataset">
-<code class="sig-name descname">get_scene_dataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scene_index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="l5kit.dataset.agent.html#l5kit.dataset.agent.AgentDataset" title="l5kit.dataset.agent.AgentDataset">l5kit.dataset.agent.AgentDataset</a><a class="headerlink" href="#l5kit.dataset.AgentDataset.get_scene_dataset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="l5kit.dataset.AgentDataset.get_scene_dataset">
+<span class="sig-name descname"><span class="pre">get_scene_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scene_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="l5kit.dataset.agent.html#l5kit.dataset.agent.AgentDataset" title="l5kit.dataset.agent.AgentDataset"><span class="pre">l5kit.dataset.agent.AgentDataset</span></a></span></span><a class="headerlink" href="#l5kit.dataset.AgentDataset.get_scene_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Differs from parent only in the return type.
 Instead of doing everything from scratch, we rely on super call and fix the agents_mask</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="l5kit.dataset.AgentDataset.get_scene_indices">
-<code class="sig-name descname">get_scene_indices</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scene_idx</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#l5kit.dataset.AgentDataset.get_scene_indices" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="l5kit.dataset.AgentDataset.get_scene_indices">
+<span class="sig-name descname"><span class="pre">get_scene_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scene_idx</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#l5kit.dataset.AgentDataset.get_scene_indices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get indices for the given scene. Here __getitem__ iterate over valid agents indices.
 This means <code class="docutils literal notranslate"><span class="pre">__getitem__(0)</span></code> matches the first valid agent in the dataset.
 :param scene_idx: index of the scene
@@ -228,8 +444,8 @@ This means <code class="docutils literal notranslate"><span class="pre">__getite
 </dd></dl>
 
 <dl class="py method">
-<dt id="l5kit.dataset.AgentDataset.load_agents_mask">
-<code class="sig-name descname">load_agents_mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#l5kit.dataset.AgentDataset.load_agents_mask" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="l5kit.dataset.AgentDataset.load_agents_mask">
+<span class="sig-name descname"><span class="pre">load_agents_mask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#l5kit.dataset.AgentDataset.load_agents_mask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Loads a boolean mask of the agent availability stored into the zarr. Performs some sanity check against cfg.
 Returns: a boolean mask of the same length of the dataset agents</p>
 </dd></dl>
@@ -237,12 +453,12 @@ Returns: a boolean mask of the same length of the dataset agents</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="l5kit.dataset.EgoDataset">
-<em class="property">class </em><code class="sig-prename descclassname">l5kit.dataset.</code><code class="sig-name descname">EgoDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cfg</span><span class="p">:</span> <span class="n">dict</span></em>, <em class="sig-param"><span class="n">zarr_dataset</span><span class="p">:</span> <span class="n"><a class="reference internal" href="l5kit.data.zarr_dataset.html#l5kit.data.zarr_dataset.ChunkedDataset" title="l5kit.data.zarr_dataset.ChunkedDataset">l5kit.data.zarr_dataset.ChunkedDataset</a></span></em>, <em class="sig-param"><span class="n">rasterizer</span><span class="p">:</span> <span class="n"><a class="reference internal" href="l5kit.rasterization.rasterizer.html#l5kit.rasterization.rasterizer.Rasterizer" title="l5kit.rasterization.rasterizer.Rasterizer">l5kit.rasterization.rasterizer.Rasterizer</a></span></em>, <em class="sig-param"><span class="n">perturbation</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference internal" href="l5kit.kinematic.perturbation.html#l5kit.kinematic.perturbation.Perturbation" title="l5kit.kinematic.perturbation.Perturbation">l5kit.kinematic.perturbation.Perturbation</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.dataset.EgoDataset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.dataset.Dataset</span></code></p>
+<dt class="sig sig-object py" id="l5kit.dataset.EgoDataset">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.dataset.</span></span><span class="sig-name descname"><span class="pre">EgoDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zarr_dataset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="l5kit.data.zarr_dataset.html#l5kit.data.zarr_dataset.ChunkedDataset" title="l5kit.data.zarr_dataset.ChunkedDataset"><span class="pre">l5kit.data.zarr_dataset.ChunkedDataset</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rasterizer</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="l5kit.rasterization.rasterizer.html#l5kit.rasterization.rasterizer.Rasterizer" title="l5kit.rasterization.rasterizer.Rasterizer"><span class="pre">l5kit.rasterization.rasterizer.Rasterizer</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">perturbation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="l5kit.kinematic.perturbation.html#l5kit.kinematic.perturbation.Perturbation" title="l5kit.kinematic.perturbation.Perturbation"><span class="pre">l5kit.kinematic.perturbation.Perturbation</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.dataset.EgoDataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.dataset.T_co</span></code>]</p>
 <dl class="py method">
-<dt id="l5kit.dataset.EgoDataset.get_frame">
-<code class="sig-name descname">get_frame</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scene_index</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">state_index</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">track_id</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#l5kit.dataset.EgoDataset.get_frame" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="l5kit.dataset.EgoDataset.get_frame">
+<span class="sig-name descname"><span class="pre">get_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scene_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#l5kit.dataset.EgoDataset.get_frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>A utility function to get the rasterisation and trajectory target for a given agent in a given frame</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -253,8 +469,9 @@ Returns: a boolean mask of the same length of the dataset agents</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the rasterised image, the target trajectory (position and yaw) along with their availability,
-the 2D matrix to center that agent, the agent track (-1 if ego) and the timestamp</p>
+<dd class="field-even"><p>the rasterised image in (Cx0x1) if the rast is not None, the target trajectory
+(position and yaw) along with their availability, the 2D matrix to center that agent,
+the agent track (-1 if ego) and the timestamp</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>dict</p>
@@ -263,8 +480,8 @@ the 2D matrix to center that agent, the agent track (-1 if ego) and the timestam
 </dd></dl>
 
 <dl class="py method">
-<dt id="l5kit.dataset.EgoDataset.get_frame_indices">
-<code class="sig-name descname">get_frame_indices</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">frame_idx</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#l5kit.dataset.EgoDataset.get_frame_indices" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="l5kit.dataset.EgoDataset.get_frame_indices">
+<span class="sig-name descname"><span class="pre">get_frame_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame_idx</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#l5kit.dataset.EgoDataset.get_frame_indices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get indices for the given frame. EgoDataset iterates over frames, so this will be a single element
 :param frame_idx: index of the scene
 :type frame_idx: int</p>
@@ -279,8 +496,8 @@ the 2D matrix to center that agent, the agent track (-1 if ego) and the timestam
 </dd></dl>
 
 <dl class="py method">
-<dt id="l5kit.dataset.EgoDataset.get_scene_dataset">
-<code class="sig-name descname">get_scene_dataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scene_index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="l5kit.dataset.ego.html#l5kit.dataset.ego.EgoDataset" title="l5kit.dataset.ego.EgoDataset">l5kit.dataset.ego.EgoDataset</a><a class="headerlink" href="#l5kit.dataset.EgoDataset.get_scene_dataset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="l5kit.dataset.EgoDataset.get_scene_dataset">
+<span class="sig-name descname"><span class="pre">get_scene_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scene_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="l5kit.dataset.ego.html#l5kit.dataset.ego.EgoDataset" title="l5kit.dataset.ego.EgoDataset"><span class="pre">l5kit.dataset.ego.EgoDataset</span></a></span></span><a class="headerlink" href="#l5kit.dataset.EgoDataset.get_scene_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns another EgoDataset dataset where the underlying data can be modified.
 This is possible because, even if it supports the same interface, this dataset is np.ndarray based.</p>
 <dl class="field-list simple">
@@ -297,8 +514,8 @@ This is possible because, even if it supports the same interface, this dataset i
 </dd></dl>
 
 <dl class="py method">
-<dt id="l5kit.dataset.EgoDataset.get_scene_indices">
-<code class="sig-name descname">get_scene_indices</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scene_idx</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#l5kit.dataset.EgoDataset.get_scene_indices" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="l5kit.dataset.EgoDataset.get_scene_indices">
+<span class="sig-name descname"><span class="pre">get_scene_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scene_idx</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#l5kit.dataset.EgoDataset.get_scene_indices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get indices for the given scene. EgoDataset iterates over frames, so this is just a matter
 of finding the scene boundaries.
 :param scene_idx: index of the scene
@@ -316,98 +533,46 @@ of finding the scene boundaries.
 </dd></dl>
 
 <dl class="py function">
-<dt id="l5kit.dataset.build_dataloader">
-<code class="sig-prename descclassname">l5kit.dataset.</code><code class="sig-name descname">build_dataloader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cfg</span><span class="p">:</span> <span class="n">Dict</span></em>, <em class="sig-param"><span class="n">split</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">data_manager</span><span class="p">:</span> <span class="n"><a class="reference internal" href="l5kit.data.local_data_manager.html#l5kit.data.local_data_manager.DataManager" title="l5kit.data.local_data_manager.DataManager">l5kit.data.local_data_manager.DataManager</a></span></em>, <em class="sig-param"><span class="n">dataset_class</span><span class="p">:</span> <span class="n">Callable</span></em>, <em class="sig-param"><span class="n">rasterizer</span><span class="p">:</span> <span class="n"><a class="reference internal" href="l5kit.rasterization.rasterizer.html#l5kit.rasterization.rasterizer.Rasterizer" title="l5kit.rasterization.rasterizer.Rasterizer">l5kit.rasterization.rasterizer.Rasterizer</a></span></em>, <em class="sig-param"><span class="n">perturbation</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference internal" href="l5kit.kinematic.perturbation.html#l5kit.kinematic.perturbation.Perturbation" title="l5kit.kinematic.perturbation.Perturbation">l5kit.kinematic.perturbation.Perturbation</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">combine_scenes</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; torch.utils.data.dataloader.DataLoader<a class="headerlink" href="#l5kit.dataset.build_dataloader" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function to build a dataloader from a dataset of dataset_class. Note we have to pass rasterizer and
-perturbation as the factory functions for those are likely to change between repos.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cfg</strong> (<em>dict</em>) – configuration dict</p></li>
-<li><p><strong>split</strong> (<em>str</em>) – this will be used to index the cfg to get the correct datasets (train or val currently)</p></li>
-<li><p><strong>data_manager</strong> (<a class="reference internal" href="l5kit.data.html#l5kit.data.DataManager" title="l5kit.data.DataManager"><em>DataManager</em></a>) – manager for resolving paths</p></li>
-<li><p><strong>dataset_class</strong> (<em>Callable</em>) – a class object (EgoDataset or AgentDataset currently) to build the dataset</p></li>
-<li><p><strong>rasterizer</strong> (<a class="reference internal" href="l5kit.rasterization.html#l5kit.rasterization.Rasterizer" title="l5kit.rasterization.Rasterizer"><em>Rasterizer</em></a>) – the rasterizer for the dataset</p></li>
-<li><p><strong>perturbation</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="l5kit.kinematic.html#l5kit.kinematic.Perturbation" title="l5kit.kinematic.Perturbation"><em>Perturbation</em></a><em>]</em>) – an optional perturbation object</p></li>
-<li><p><strong>combine_scenes</strong> (<em>bool</em>) – if to combine scenes that follow up each other perfectly</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pytorch Dataloader object built with Concat and Sub datasets</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>DataLoader</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="l5kit.dataset.select_agents">
+<span class="sig-prename descclassname"><span class="pre">l5kit.dataset.</span></span><span class="sig-name descname"><span class="pre">select_agents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zarr_dataset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="l5kit.data.zarr_dataset.html#l5kit.data.zarr_dataset.ChunkedDataset" title="l5kit.data.zarr_dataset.ChunkedDataset"><span class="pre">l5kit.data.zarr_dataset.ChunkedDataset</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">th_agent_prob</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">th_yaw_degree</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">th_extent_ratio</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">th_distance_av</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#l5kit.dataset.select_agents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter agents from zarr INPUT_FOLDER according to multiple thresholds and store a boolean array of the same shape.</p>
 </dd></dl>
 
-<div class="section" id="submodules">
+<section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="l5kit.dataset.agent.html">l5kit.dataset.agent module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="l5kit.dataset.dataloader_builder.html">l5kit.dataset.dataloader_builder module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="l5kit.dataset.ego.html">l5kit.dataset.ego module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="l5kit.dataset.select_agents.html">l5kit.dataset.select_agents module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l5kit.dataset.utils.html">l5kit.dataset.utils module</a></li>
 </ul>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
-           </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="l5kit.dataset.agent.html" class="btn btn-neutral float-right" title="l5kit.dataset.agent module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="l5kit.data.zarr_utils.html" class="btn btn-neutral float-left" title="l5kit.data.zarr_utils module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2020, Lyft Level 5
-
-    </p>
-  </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="l5kit.data.zarr_utils.html"
+       title="previous chapter">← l5kit.data.zarr_utils module</a>
+  </li>
+  <li class="next">
+    <a href="l5kit.dataset.agent.html"
+       title="next chapter">l5kit.dataset.agent module →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2021, Level 5. Car Vectors by Vecteezy (https://www.vecteezy.com/free-vector/car).
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.1.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
     
     
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
-
-</footer>
-
-        </div>
-      </div>
-
-    </section>
-
-  </div>
-  
-
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-
-  
-  
-    
-   
-
-</body>
+  </body>
 </html>

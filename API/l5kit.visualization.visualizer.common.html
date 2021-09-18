@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+      <title>l5kit.visualization.visualizer.common module</title>
+    
+          <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="../_static/theme.css " type="text/css" />
+          <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+
+      
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="../_static/theme-vendors.js"></script> -->
+      <script src="../_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="../genindex.html" />
+  <link rel="search" title="Search" href="../search.html" />
+  <link rel="next" title="l5kit.visualization.visualizer.visualizer module" href="l5kit.visualization.visualizer.visualizer.html" />
+  <link rel="prev" title="l5kit.visualization.visualizer package" href="l5kit.visualization.visualizer.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="../index.html" class="home-link">
+    
+      <img class="logo" src="../_static/L5logo_small_v2.png" alt="logo"/>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="../index.html#"
+         class="nav-link ">
+         None
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../intro_index.html#introduction-and-overview"
+         class="nav-link ">
+         introduction and overview
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../gettingstarted.html#getting-started"
+         class="nav-link ">
+         getting started
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../tutorials.html#tutorials"
+         class="nav-link ">
+         tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../competitions.html#competitions"
+         class="nav-link ">
+         competitions
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../contribute_index.html#contribute"
+         class="nav-link ">
+         contribute
+      </a>
+    </div>
+  
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/lyft/l5kit"
+        class="nav-link external">
+          Github <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="../index.html#"
+         class="nav-link ">
+         None
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../intro_index.html#introduction-and-overview"
+         class="nav-link ">
+         introduction and overview
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../gettingstarted.html#getting-started"
+         class="nav-link ">
+         getting started
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../tutorials.html#tutorials"
+         class="nav-link ">
+         tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../competitions.html#competitions"
+         class="nav-link ">
+         competitions
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../contribute_index.html#contribute"
+         class="nav-link ">
+         contribute
+      </a>
+    </div>
+  
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/lyft/l5kit"
+        class="nav-link external">
+          Github <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="../search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#">None</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../changelog.html" class="reference internal ">Changelog</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../intro_index.html#introduction-and-overview">introduction and overview</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../introduction.html" class="reference internal ">Introduction</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../overview.html" class="reference internal ">Overview</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../gettingstarted.html#getting-started">getting started</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../installation.html" class="reference internal ">Installation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../data_format.html" class="reference internal ">Dataset Formats in L5Kit</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../coords_systems.html" class="reference internal ">Coordinate Systems in L5Kit</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../tutorials.html#tutorials">tutorials</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../prediction.html" class="reference internal ">Prediction</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../planning.html" class="reference internal ">Planning</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../simulation.html" class="reference internal ">Simulation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../reinforcement.html" class="reference internal ">Reinforcement Learning</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../competitions.html#competitions">competitions</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../prediction_competition.html" class="reference internal ">Prediction Competition</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../contribute_index.html#contribute">contribute</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../how_to_contribute.html" class="reference internal ">How to contribute</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../api_reference.html" class="reference internal ">API Reference</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../license.html" class="reference internal ">License</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../credits.html" class="reference internal ">Credits</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../contribute_index.html">Contribute</a> &raquo;</li>
+    
+      <li><a href="../api_reference.html">API Reference</a> &raquo;</li>
+    
+      <li><a href="l5kit.visualization.html">l5kit.visualization package</a> &raquo;</li>
+    
+      <li><a href="l5kit.visualization.visualizer.html">l5kit.visualization.visualizer package</a> &raquo;</li>
+    
+    <li>l5kit.visualization.visualizer.common module</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="l5kit.visualization.visualizer.html"
+       title="previous chapter">← l5kit.visualization.visualizer package</a>
+  </li>
+  <li class="next">
+    <a href="l5kit.visualization.visualizer.visualizer.html"
+       title="next chapter">l5kit.visualization.visualizer.visualizer module →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <section id="module-l5kit.visualization.visualizer.common">
+<span id="l5kit-visualization-visualizer-common-module"></span><h1>l5kit.visualization.visualizer.common module<a class="headerlink" href="#module-l5kit.visualization.visualizer.common" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.AgentVisualization">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.visualization.visualizer.common.</span></span><span class="sig-name descname"><span class="pre">AgentVisualization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.visualization.visualizer.common.AgentVisualization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Hold information about a single agent</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xs</strong> – 1D array of x coordinates</p></li>
+<li><p><strong>ys</strong> – 1D array of y coordinates</p></li>
+<li><p><strong>color</strong> – color of the lane as a string (both hex or text)</p></li>
+<li><p><strong>track_id</strong> – track id of the agent (unique in a scene)</p></li>
+<li><p><strong>agent_type</strong> – type of the agent as a string (e.g. pedestrian)</p></li>
+<li><p><strong>prob</strong> – probability of the agent from PCB</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.AgentVisualization.agent_type">
+<span class="sig-name descname"><span class="pre">agent_type</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.AgentVisualization.agent_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.AgentVisualization.color">
+<span class="sig-name descname"><span class="pre">color</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.AgentVisualization.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.AgentVisualization.prob">
+<span class="sig-name descname"><span class="pre">prob</span></span><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.AgentVisualization.prob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 5</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.AgentVisualization.track_id">
+<span class="sig-name descname"><span class="pre">track_id</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.AgentVisualization.track_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.AgentVisualization.xs">
+<span class="sig-name descname"><span class="pre">xs</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.AgentVisualization.xs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.AgentVisualization.ys">
+<span class="sig-name descname"><span class="pre">ys</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.AgentVisualization.ys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.CWVisualization">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.visualization.visualizer.common.</span></span><span class="sig-name descname"><span class="pre">CWVisualization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.visualization.visualizer.common.CWVisualization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Hold information about a single crosswalk</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xs</strong> – 1D array of x coordinates</p></li>
+<li><p><strong>ys</strong> – 1D array of y coordinates</p></li>
+<li><p><strong>color</strong> – color of the lane as a string (both hex or text)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.CWVisualization.color">
+<span class="sig-name descname"><span class="pre">color</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.CWVisualization.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.CWVisualization.xs">
+<span class="sig-name descname"><span class="pre">xs</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.CWVisualization.xs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.CWVisualization.ys">
+<span class="sig-name descname"><span class="pre">ys</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.CWVisualization.ys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.EgoVisualization">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.visualization.visualizer.common.</span></span><span class="sig-name descname"><span class="pre">EgoVisualization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_y</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.visualization.visualizer.common.EgoVisualization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Hold information about a single ego annotation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xs</strong> – 1D array of x coordinates</p></li>
+<li><p><strong>ys</strong> – 1D array of y coordinates</p></li>
+<li><p><strong>color</strong> – color of the lane as a string (both hex or text)</p></li>
+<li><p><strong>center_x</strong> – the center x coordinate of the ego bbox</p></li>
+<li><p><strong>center_y</strong> – the center y coordinate of the ego bbox</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.EgoVisualization.center_x">
+<span class="sig-name descname"><span class="pre">center_x</span></span><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.EgoVisualization.center_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.EgoVisualization.center_y">
+<span class="sig-name descname"><span class="pre">center_y</span></span><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.EgoVisualization.center_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.EgoVisualization.color">
+<span class="sig-name descname"><span class="pre">color</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.EgoVisualization.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.EgoVisualization.xs">
+<span class="sig-name descname"><span class="pre">xs</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.EgoVisualization.xs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.EgoVisualization.ys">
+<span class="sig-name descname"><span class="pre">ys</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.EgoVisualization.ys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.FrameVisualization">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.visualization.visualizer.common.</span></span><span class="sig-name descname"><span class="pre">FrameVisualization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ego</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#l5kit.visualization.visualizer.common.EgoVisualization" title="l5kit.visualization.visualizer.common.EgoVisualization"><span class="pre">l5kit.visualization.visualizer.common.EgoVisualization</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">agents</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#l5kit.visualization.visualizer.common.AgentVisualization" title="l5kit.visualization.visualizer.common.AgentVisualization"><span class="pre">l5kit.visualization.visualizer.common.AgentVisualization</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lanes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#l5kit.visualization.visualizer.common.LaneVisualization" title="l5kit.visualization.visualizer.common.LaneVisualization"><span class="pre">l5kit.visualization.visualizer.common.LaneVisualization</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crosswalks</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#l5kit.visualization.visualizer.common.CWVisualization" title="l5kit.visualization.visualizer.common.CWVisualization"><span class="pre">l5kit.visualization.visualizer.common.CWVisualization</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trajectories</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#l5kit.visualization.visualizer.common.TrajectoryVisualization" title="l5kit.visualization.visualizer.common.TrajectoryVisualization"><span class="pre">l5kit.visualization.visualizer.common.TrajectoryVisualization</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.visualization.visualizer.common.FrameVisualization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Hold information about a frame (the state of a scene at a given time)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ego</strong> – a single ego annotation</p></li>
+<li><p><strong>agents</strong> – a list of agents</p></li>
+<li><p><strong>lanes</strong> – a list of lanes</p></li>
+<li><p><strong>crosswalks</strong> – a list of crosswalks</p></li>
+<li><p><strong>trajectories</strong> – a list of trajectories</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.FrameVisualization.agents">
+<span class="sig-name descname"><span class="pre">agents</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#l5kit.visualization.visualizer.common.AgentVisualization" title="l5kit.visualization.visualizer.common.AgentVisualization"><span class="pre">l5kit.visualization.visualizer.common.AgentVisualization</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.FrameVisualization.agents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.FrameVisualization.crosswalks">
+<span class="sig-name descname"><span class="pre">crosswalks</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#l5kit.visualization.visualizer.common.CWVisualization" title="l5kit.visualization.visualizer.common.CWVisualization"><span class="pre">l5kit.visualization.visualizer.common.CWVisualization</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.FrameVisualization.crosswalks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.FrameVisualization.ego">
+<span class="sig-name descname"><span class="pre">ego</span></span><em class="property"><span class="pre">:</span> <a class="reference internal" href="#l5kit.visualization.visualizer.common.EgoVisualization" title="l5kit.visualization.visualizer.common.EgoVisualization"><span class="pre">l5kit.visualization.visualizer.common.EgoVisualization</span></a></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.FrameVisualization.ego" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.FrameVisualization.lanes">
+<span class="sig-name descname"><span class="pre">lanes</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#l5kit.visualization.visualizer.common.LaneVisualization" title="l5kit.visualization.visualizer.common.LaneVisualization"><span class="pre">l5kit.visualization.visualizer.common.LaneVisualization</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.FrameVisualization.lanes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.FrameVisualization.trajectories">
+<span class="sig-name descname"><span class="pre">trajectories</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#l5kit.visualization.visualizer.common.TrajectoryVisualization" title="l5kit.visualization.visualizer.common.TrajectoryVisualization"><span class="pre">l5kit.visualization.visualizer.common.TrajectoryVisualization</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.FrameVisualization.trajectories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.LaneVisualization">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.visualization.visualizer.common.</span></span><span class="sig-name descname"><span class="pre">LaneVisualization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.visualization.visualizer.common.LaneVisualization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Hold information about a single lane</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xs</strong> – 1D array of x coordinates</p></li>
+<li><p><strong>ys</strong> – 1D array of y coordinates</p></li>
+<li><p><strong>color</strong> – color of the lane as a string (both hex or text)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.LaneVisualization.color">
+<span class="sig-name descname"><span class="pre">color</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.LaneVisualization.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.LaneVisualization.xs">
+<span class="sig-name descname"><span class="pre">xs</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.LaneVisualization.xs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.LaneVisualization.ys">
+<span class="sig-name descname"><span class="pre">ys</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.LaneVisualization.ys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.TrajectoryVisualization">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.visualization.visualizer.common.</span></span><span class="sig-name descname"><span class="pre">TrajectoryVisualization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend_label</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.visualization.visualizer.common.TrajectoryVisualization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Hold information about a single trajectory annotation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xs</strong> – 1D array of x coordinates</p></li>
+<li><p><strong>ys</strong> – 1D array of y coordinates</p></li>
+<li><p><strong>color</strong> – color of the lane as a string (both hex or text)</p></li>
+<li><p><strong>legend_label</strong> – the name of this trajectory for the legend (e.g. <cite>ego_trajectory</cite>)</p></li>
+<li><p><strong>track_id</strong> – the track id of the associated agent</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.TrajectoryVisualization.color">
+<span class="sig-name descname"><span class="pre">color</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.TrajectoryVisualization.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.TrajectoryVisualization.legend_label">
+<span class="sig-name descname"><span class="pre">legend_label</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.TrajectoryVisualization.legend_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.TrajectoryVisualization.track_id">
+<span class="sig-name descname"><span class="pre">track_id</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.TrajectoryVisualization.track_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.TrajectoryVisualization.xs">
+<span class="sig-name descname"><span class="pre">xs</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.TrajectoryVisualization.xs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.visualization.visualizer.common.TrajectoryVisualization.ys">
+<span class="sig-name descname"><span class="pre">ys</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#l5kit.visualization.visualizer.common.TrajectoryVisualization.ys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="l5kit.visualization.visualizer.html"
+       title="previous chapter">← l5kit.visualization.visualizer package</a>
+  </li>
+  <li class="next">
+    <a href="l5kit.visualization.visualizer.visualizer.html"
+       title="next chapter">l5kit.visualization.visualizer.visualizer module →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2021, Level 5. Car Vectors by Vecteezy (https://www.vecteezy.com/free-vector/car).
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.1.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
+    
+    
+  </body>
+</html>

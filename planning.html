@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+      <title>Planning</title>
+    
+          <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="_static/theme.css " type="text/css" />
+          <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+
+      
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="_static/theme-vendors.js"></script> -->
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="Simulation" href="simulation.html" />
+  <link rel="prev" title="Prediction" href="prediction.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    
+      <img class="logo" src="_static/L5logo_small_v2.png" alt="logo"/>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="index.html#"
+         class="nav-link ">
+         None
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="intro_index.html#introduction-and-overview"
+         class="nav-link ">
+         introduction and overview
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="gettingstarted.html#getting-started"
+         class="nav-link ">
+         getting started
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="tutorials.html#tutorials"
+         class="nav-link  router-link-active">
+         tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="competitions.html#competitions"
+         class="nav-link ">
+         competitions
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="contribute_index.html#contribute"
+         class="nav-link ">
+         contribute
+      </a>
+    </div>
+  
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/lyft/l5kit"
+        class="nav-link external">
+          Github <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="index.html#"
+         class="nav-link ">
+         None
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="intro_index.html#introduction-and-overview"
+         class="nav-link ">
+         introduction and overview
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="gettingstarted.html#getting-started"
+         class="nav-link ">
+         getting started
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="tutorials.html#tutorials"
+         class="nav-link  router-link-active">
+         tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="competitions.html#competitions"
+         class="nav-link ">
+         competitions
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="contribute_index.html#contribute"
+         class="nav-link ">
+         contribute
+      </a>
+    </div>
+  
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/lyft/l5kit"
+        class="nav-link external">
+          Github <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="index.html#">None</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="changelog.html" class="reference internal ">Changelog</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="intro_index.html#introduction-and-overview">introduction and overview</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="introduction.html" class="reference internal ">Introduction</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="overview.html" class="reference internal ">Overview</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="gettingstarted.html#getting-started">getting started</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="installation.html" class="reference internal ">Installation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="data_format.html" class="reference internal ">Dataset Formats in L5Kit</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="coords_systems.html" class="reference internal ">Coordinate Systems in L5Kit</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="tutorials.html#tutorials">tutorials</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="prediction.html" class="reference internal ">Prediction</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 current">
+            
+              <a href="#" class="reference internal current">Planning</a>
+            
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#notebook-tutorial" class="reference internal">Notebook Tutorial</a></li>
+                
+                  <li class="toctree-l2"><a href="#video-tutorial" class="reference internal">Video Tutorial</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="simulation.html" class="reference internal ">Simulation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="reinforcement.html" class="reference internal ">Reinforcement Learning</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="competitions.html#competitions">competitions</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="prediction_competition.html" class="reference internal ">Prediction Competition</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="contribute_index.html#contribute">contribute</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="how_to_contribute.html" class="reference internal ">How to contribute</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="api_reference.html" class="reference internal ">API Reference</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="license.html" class="reference internal ">License</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="credits.html" class="reference internal ">Credits</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
+    
+    <li>Planning</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="prediction.html"
+       title="previous chapter">← Prediction</a>
+  </li>
+  <li class="next">
+    <a href="simulation.html"
+       title="next chapter">Simulation →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <section id="planning">
+<span id="id1"></span><h1>Planning<a class="headerlink" href="#planning" title="Permalink to this headline">¶</a></h1>
+<p>Planning is an essential piece of the Autonomous Vehicles (AV) stack.</p>
+<p>In this series of notebooks you will train and evaluate a data-driven ML policy.</p>
+<p><strong>Before starting, please download the Lyft L5 Prediction Dataset 2020 and follow the instructions to correctly organise it.</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://self-driving.lyft.com/level5/prediction/">Lyft L5 Prediction Dataset 2020</a></p></li>
+<li><p><a class="reference external" href="https://github.com/lyft/l5kit#download-the-datasets">Instructions</a></p></li>
+</ul>
+<p>Training an effective ML policy for planning can take several hours on the best performing hardware.
+For this reason, we provide trained models you can experiment with in our evaluations notebooks,
+without requiring to train one yourself. Still, we suggest you to go through the training notebook we provide,
+as it contains key insights on how to effectively train an ML policy for planning.</p>
+<section id="notebook-tutorial">
+<h2>Notebook Tutorial<a class="headerlink" href="#notebook-tutorial" title="Permalink to this headline">¶</a></h2>
+<p>We provide 3 notebooks for a deep dive into planning for a Self Driving Vehicle (SDV).</p>
+<section id="training-notebook">
+<h3>Training Notebook<a class="headerlink" href="#training-notebook" title="Permalink to this headline">¶</a></h3>
+<p>You can train your first ML policy for planning using our <a class="reference external" href="https://github.com/lyft/l5kit/blob/master/examples/planning/train.ipynb">training notebook</a></p>
+<a class="reference external image-reference" href="https://colab.research.google.com/github/lyft/l5kit/blob/master/examples/planning/train.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a>
+<p>In this notebook you are going to train your own ML policy to fully control a Self Driving Vehicle (SDV). You will train your model using the Lyft Prediction Dataset and L5Kit.</p>
+<p>The policy will be a deep neural network (DNN) which will be invoked by the SDV to obtain the next command to execute.</p>
+<p>More in details, you will be working with a CNN architecture based on ResNet50.</p>
+<img alt="model" src="_images/model.svg" /><section id="inputs">
+<h4>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h4>
+<p>The network will get a BEV of the scene surrounding the SDV as the only input. This has been rasterised in a fixed grid image to comply with the CNN input. L5Kit is shipped with various rasterisers. Each one of them captures different aspects of the scene (e.g. lanes or satellite view).</p>
+<p>This input representation is very similar to the one used in the <a class="reference external" href="https://www.kaggle.com/c/lyft-motion-prediction-autonomous-vehicles/overview">prediction competition</a>. Please refer to our <a class="reference external" href="https://github.com/lyft/l5kit/blob/master/examples/agent_motion_prediction/agent_motion_prediction.ipynb">competition baseline notebook</a>
+and our <a class="reference external" href="https://github.com/lyft/l5kit/blob/master/examples/visualisation/visualise_data.ipynb">data format notebook</a> if you want to learn more about it.</p>
+</section>
+<section id="outputs">
+<h4>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h4>
+<p>The network outputs the driving signals required to fully control the SDV. In particular, this is a trajectory of XY and yaw displacements which can be used to move and steer the vehicle.</p>
+<p>After enough training, your model will be able to drive the SDV along a specific route. Among others, it will do lane-following while respecting traffic lights.</p>
+</section>
+<section id="pre-trained-models">
+<h4>Pre-Trained Models<a class="headerlink" href="#pre-trained-models" title="Permalink to this headline">¶</a></h4>
+<p>We provide a collection of pre-trained models you can experiment with and use in your own experiments.
+Please refer to the training notebook for additional details and download links.</p>
+</section>
+</section>
+<section id="open-loop-evaluation-notebook">
+<h3>Open-Loop Evaluation Notebook<a class="headerlink" href="#open-loop-evaluation-notebook" title="Permalink to this headline">¶</a></h3>
+<p>You can evaluate your model in the open-loop setting using our <a class="reference external" href="https://github.com/lyft/l5kit/blob/master/examples/planning/open_loop_test.ipynb">open-loop evaluation notebook</a></p>
+<a class="reference external image-reference" href="https://colab.research.google.com/github/lyft/l5kit/blob/master/examples/planning/open_loop_test.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a>
+<section id="what-is-open-loop-evaluation">
+<h4>What is open-loop evaluation?<a class="headerlink" href="#what-is-open-loop-evaluation" title="Permalink to this headline">¶</a></h4>
+<p>In open-loop evaluation we evaluate our model prediction as we follow the annotated ground truth.</p>
+<p>In each frame, we compare the predictions of our model against the annotated ground truth. This can be done with different metrics.</p>
+<p><strong>Regardless of the metric used, this evaluation protocol doesn’t modify the future locations according to the model’s predictions.</strong></p>
+<img alt="open-loop" src="_images/open-loop.svg" /></section>
+</section>
+<section id="closed-loop-evaluation-notebook">
+<h3>Closed-Loop Evaluation Notebook<a class="headerlink" href="#closed-loop-evaluation-notebook" title="Permalink to this headline">¶</a></h3>
+<p>You can evaluate your model in the closed-loop setting using our <a class="reference external" href="https://github.com/lyft/l5kit/blob/master/examples/planning/closed_loop_test.ipynb">closed-loop evaluation notebook</a></p>
+<a class="reference external image-reference" href="https://colab.research.google.com/github/lyft/l5kit/blob/master/examples/planning/closed_loop_test.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a>
+<p>In this notebook you are going to evaluate a CNN-based policy to control the SDV with a protocol named <em>closed-loop</em> evaluation.</p>
+<section id="what-is-closed-loop-evaluation">
+<h4>What is closed-loop evaluation?<a class="headerlink" href="#what-is-closed-loop-evaluation" title="Permalink to this headline">¶</a></h4>
+<p>In closed-loop evaluation the model is in <strong>full control of the SDV</strong>. At each time step, we predict the future trajectory and then move the AV to the first of the model’s predictions.</p>
+<p>We refer to this process with the terms <strong>forward-simulate</strong> or <strong>unroll</strong>.</p>
+<img alt="closed-loop" src="_images/closed-loop.svg" /></section>
+</section>
+</section>
+<section id="video-tutorial">
+<h2>Video Tutorial<a class="headerlink" href="#video-tutorial" title="Permalink to this headline">¶</a></h2>
+<p>Check out this short tutorial that describes the task of planning for autonomous driving</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Jygsh17QbxY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></section>
+</section>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="prediction.html"
+       title="previous chapter">← Prediction</a>
+  </li>
+  <li class="next">
+    <a href="simulation.html"
+       title="next chapter">Simulation →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2021, Level 5. Car Vectors by Vecteezy (https://www.vecteezy.com/free-vector/car).
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.1.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
+    
+    
+  </body>
+</html>

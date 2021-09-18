@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+      <title>l5kit.cle.closed_loop_evaluator module</title>
+    
+          <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="../_static/theme.css " type="text/css" />
+          <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+
+      
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="../_static/theme-vendors.js"></script> -->
+      <script src="../_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="../genindex.html" />
+  <link rel="search" title="Search" href="../search.html" />
+  <link rel="next" title="l5kit.cle.composite_metrics module" href="l5kit.cle.composite_metrics.html" />
+  <link rel="prev" title="l5kit.cle package" href="l5kit.cle.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="../index.html" class="home-link">
+    
+      <img class="logo" src="../_static/L5logo_small_v2.png" alt="logo"/>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="../index.html#"
+         class="nav-link ">
+         None
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../intro_index.html#introduction-and-overview"
+         class="nav-link ">
+         introduction and overview
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../gettingstarted.html#getting-started"
+         class="nav-link ">
+         getting started
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../tutorials.html#tutorials"
+         class="nav-link ">
+         tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../competitions.html#competitions"
+         class="nav-link ">
+         competitions
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../contribute_index.html#contribute"
+         class="nav-link ">
+         contribute
+      </a>
+    </div>
+  
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/lyft/l5kit"
+        class="nav-link external">
+          Github <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="../index.html#"
+         class="nav-link ">
+         None
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../intro_index.html#introduction-and-overview"
+         class="nav-link ">
+         introduction and overview
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../gettingstarted.html#getting-started"
+         class="nav-link ">
+         getting started
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../tutorials.html#tutorials"
+         class="nav-link ">
+         tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../competitions.html#competitions"
+         class="nav-link ">
+         competitions
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../contribute_index.html#contribute"
+         class="nav-link ">
+         contribute
+      </a>
+    </div>
+  
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/lyft/l5kit"
+        class="nav-link external">
+          Github <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="../search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#">None</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../changelog.html" class="reference internal ">Changelog</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../intro_index.html#introduction-and-overview">introduction and overview</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../introduction.html" class="reference internal ">Introduction</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../overview.html" class="reference internal ">Overview</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../gettingstarted.html#getting-started">getting started</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../installation.html" class="reference internal ">Installation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../data_format.html" class="reference internal ">Dataset Formats in L5Kit</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../coords_systems.html" class="reference internal ">Coordinate Systems in L5Kit</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../tutorials.html#tutorials">tutorials</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../prediction.html" class="reference internal ">Prediction</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../planning.html" class="reference internal ">Planning</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../simulation.html" class="reference internal ">Simulation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../reinforcement.html" class="reference internal ">Reinforcement Learning</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../competitions.html#competitions">competitions</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../prediction_competition.html" class="reference internal ">Prediction Competition</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../contribute_index.html#contribute">contribute</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../how_to_contribute.html" class="reference internal ">How to contribute</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../api_reference.html" class="reference internal ">API Reference</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../license.html" class="reference internal ">License</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../credits.html" class="reference internal ">Credits</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../contribute_index.html">Contribute</a> &raquo;</li>
+    
+      <li><a href="../api_reference.html">API Reference</a> &raquo;</li>
+    
+      <li><a href="l5kit.cle.html">l5kit.cle package</a> &raquo;</li>
+    
+    <li>l5kit.cle.closed_loop_evaluator module</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="l5kit.cle.html"
+       title="previous chapter">← l5kit.cle package</a>
+  </li>
+  <li class="next">
+    <a href="l5kit.cle.composite_metrics.html"
+       title="next chapter">l5kit.cle.composite_metrics module →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <section id="module-l5kit.cle.closed_loop_evaluator">
+<span id="l5kit-cle-closed-loop-evaluator-module"></span><h1>l5kit.cle.closed_loop_evaluator module<a class="headerlink" href="#module-l5kit.cle.closed_loop_evaluator" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.cle.closed_loop_evaluator.</span></span><span class="sig-name descname"><span class="pre">ClosedLoopEvaluator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evaluation_plan</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#l5kit.cle.closed_loop_evaluator.EvaluationPlan" title="l5kit.cle.closed_loop_evaluator.EvaluationPlan"><span class="pre">l5kit.cle.closed_loop_evaluator.EvaluationPlan</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The closed loop evaluator executes a evaluation plan and keep
+track of histograms, failed scenes, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>evaluation_plan</strong> – the specified evaluation plan</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.composite_metric_results">
+<span class="sig-name descname"><span class="pre">composite_metric_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.composite_metric_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the computed composite metric results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a dictionary indexed by scene with composite metric name
+and results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">simulation_outputs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="l5kit.simulation.unroll.html#l5kit.simulation.unroll.SimulationOutputCLE" title="l5kit.simulation.unroll.SimulationOutputCLE"><span class="pre">l5kit.simulation.unroll.SimulationOutputCLE</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the evaluation plan on all outputs from the simulator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>simulation_outputs</strong> – the outputs from the simulator</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.metric_results">
+<span class="sig-name descname"><span class="pre">metric_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.metric_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the computed metric results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a dictionary indexed by scene with metric name
+and results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the computed stats.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.scene_composite_metric_results">
+<span class="sig-name descname"><span class="pre">scene_composite_metric_results</span></span><em class="property"><span class="pre">:</span> <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.scene_composite_metric_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Results from the composite metrics indexed by the scene id</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.scene_metric_results">
+<span class="sig-name descname"><span class="pre">scene_metric_results</span></span><em class="property"><span class="pre">:</span> <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.scene_metric_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Results of the metrics indexed by the scene id</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.scene_validation_results">
+<span class="sig-name descname"><span class="pre">scene_validation_results</span></span><em class="property"><span class="pre">:</span> <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="l5kit.cle.validators.html#l5kit.cle.validators.ValidatorOutput" title="l5kit.cle.validators.ValidatorOutput"><span class="pre">l5kit.cle.validators.ValidatorOutput</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.scene_validation_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Results from the validation results indexed by the scene id</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.validation_results">
+<span class="sig-name descname"><span class="pre">validation_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="l5kit.cle.validators.html#l5kit.cle.validators.ValidatorOutput" title="l5kit.cle.validators.ValidatorOutput"><span class="pre">l5kit.cle.validators.ValidatorOutput</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.ClosedLoopEvaluator.validation_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the computed validator results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a dictionary indexed by scene with validator name
+and results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.EvaluationPlan">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">l5kit.cle.closed_loop_evaluator.</span></span><span class="sig-name descname"><span class="pre">EvaluationPlan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="l5kit.cle.metrics.html#l5kit.cle.metrics.SupportsMetricCompute" title="l5kit.cle.metrics.SupportsMetricCompute"><span class="pre">l5kit.cle.metrics.SupportsMetricCompute</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validators</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="l5kit.cle.validators.html#l5kit.cle.validators.SupportsMetricValidate" title="l5kit.cle.validators.SupportsMetricValidate"><span class="pre">l5kit.cle.validators.SupportsMetricValidate</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">composite_metrics</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="l5kit.cle.composite_metrics.html#l5kit.cle.composite_metrics.SupportsCompositeMetricCompute" title="l5kit.cle.composite_metrics.SupportsCompositeMetricCompute"><span class="pre">l5kit.cle.composite_metrics.SupportsCompositeMetricCompute</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intervention_validators</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.EvaluationPlan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Evaluation plan describes a plan to evaluate metrics and run
+validators. It is composed by the list of metrics that should be computed
+as well as the list of validators that will run. It checks for consistency
+of the plan (validators depend on metrics).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that the intervention_validators argument, that
+specifies a list of interventions will stop the validation
+of all other metrics if any validator specified in this list
+is triggered.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metrics</strong> – list of the metrics to compute</p></li>
+<li><p><strong>validators</strong> – list of validators to compute</p></li>
+<li><p><strong>composite_metrics</strong> – list of composite metrics to compute</p></li>
+<li><p><strong>intervention_validators</strong> – list of validators that are considered
+interventions.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.EvaluationPlan.composite_metrics_dict">
+<span class="sig-name descname"><span class="pre">composite_metrics_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="l5kit.cle.composite_metrics.html#l5kit.cle.composite_metrics.SupportsCompositeMetricCompute" title="l5kit.cle.composite_metrics.SupportsCompositeMetricCompute"><span class="pre">l5kit.cle.composite_metrics.SupportsCompositeMetricCompute</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.EvaluationPlan.composite_metrics_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the composite metric names and composite metrics from the plan.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.EvaluationPlan.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">simulation_output</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="l5kit.simulation.unroll.html#l5kit.simulation.unroll.SimulationOutputCLE" title="l5kit.simulation.unroll.SimulationOutputCLE"><span class="pre">l5kit.simulation.unroll.SimulationOutputCLE</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.EvaluationPlan.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the evaluation (metric computation) on the scene.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>simulation_output</strong> – output from the closed-loop simulator</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>results from all metrics on a dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.EvaluationPlan.evaluate_composite">
+<span class="sig-name descname"><span class="pre">evaluate_composite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">simulation_output</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="l5kit.simulation.unroll.html#l5kit.simulation.unroll.SimulationOutputCLE" title="l5kit.simulation.unroll.SimulationOutputCLE"><span class="pre">l5kit.simulation.unroll.SimulationOutputCLE</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">scene_metrics</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scene_validation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="l5kit.cle.validators.html#l5kit.cle.validators.ValidatorOutput" title="l5kit.cle.validators.ValidatorOutput"><span class="pre">l5kit.cle.validators.ValidatorOutput</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.EvaluationPlan.evaluate_composite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the evaluation of the composite metrics on the scene.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>simulation_output</strong> – output from the closed-loop simulator</p></li>
+<li><p><strong>scene_metrics</strong> – metric results indexed by the metric name</p></li>
+<li><p><strong>scene_validation</strong> – outputs from validator indexed by the validation name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>results from the composite metrics indexed by the composite metric name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.EvaluationPlan.metrics_dict">
+<span class="sig-name descname"><span class="pre">metrics_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="l5kit.cle.metrics.html#l5kit.cle.metrics.SupportsMetricCompute" title="l5kit.cle.metrics.SupportsMetricCompute"><span class="pre">l5kit.cle.metrics.SupportsMetricCompute</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.EvaluationPlan.metrics_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the metric names and metrics from the plan.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.EvaluationPlan.process_interventions">
+<span class="sig-name descname"><span class="pre">process_interventions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="l5kit.cle.validators.html#l5kit.cle.validators.ValidatorOutput" title="l5kit.cle.validators.ValidatorOutput"><span class="pre">l5kit.cle.validators.ValidatorOutput</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="l5kit.cle.validators.html#l5kit.cle.validators.ValidatorOutput" title="l5kit.cle.validators.ValidatorOutput"><span class="pre">l5kit.cle.validators.ValidatorOutput</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.EvaluationPlan.process_interventions" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will process the the validator results accordingly
+to the validators defined as interventions. If any validator, that
+is also an intervention is triggered, it will reset all other validators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>results</strong> – resuls from the validation</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>updated the results</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.EvaluationPlan.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scene_metrics</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulation_output</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="l5kit.simulation.unroll.html#l5kit.simulation.unroll.SimulationOutputCLE" title="l5kit.simulation.unroll.SimulationOutputCLE"><span class="pre">l5kit.simulation.unroll.SimulationOutputCLE</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="l5kit.cle.validators.html#l5kit.cle.validators.ValidatorOutput" title="l5kit.cle.validators.ValidatorOutput"><span class="pre">l5kit.cle.validators.ValidatorOutput</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.EvaluationPlan.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the validation (validators) on all metric results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scene_metrics</strong> – the result for the metrics computation</p></li>
+<li><p><strong>simulation_output</strong> – output from the closed-loop simulator</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the result of all validators</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="l5kit.cle.closed_loop_evaluator.EvaluationPlan.validators_dict">
+<span class="sig-name descname"><span class="pre">validators_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="l5kit.cle.validators.html#l5kit.cle.validators.SupportsMetricValidate" title="l5kit.cle.validators.SupportsMetricValidate"><span class="pre">l5kit.cle.validators.SupportsMetricValidate</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#l5kit.cle.closed_loop_evaluator.EvaluationPlan.validators_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the validator names and validators from the plan.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="l5kit.cle.html"
+       title="previous chapter">← l5kit.cle package</a>
+  </li>
+  <li class="next">
+    <a href="l5kit.cle.composite_metrics.html"
+       title="next chapter">l5kit.cle.composite_metrics module →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2021, Level 5. Car Vectors by Vecteezy (https://www.vecteezy.com/free-vector/car).
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.1.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
+    
+    
+  </body>
+</html>
